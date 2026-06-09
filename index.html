@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Travel Group — EST 240 Visual Rhetoric</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* ─── INDEX-ONLY STYLES ─── */
+main {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100%;
+}
+
+/* ─── HERO — full-viewport ─── */
+.hero-image-block {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-3);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.hero-image-block img {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .5;
+}
+.hero-image-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-image-placeholder-text {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted);
+  border: 1px dashed var(--line-2);
+  padding: 10px 20px; border-radius: 6px;
+}
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 0 60px 72px;
+  max-width: 800px;
+}
+.hero-overlay-eyebrow {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-overlay-eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 2px; background: var(--amber);
+}
+.hero-overlay h1 {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700; letter-spacing: -.04em;
+  line-height: 1.0; color: var(--ink);
+  margin-bottom: 28px;
+  text-shadow: 0 2px 40px rgba(0,0,0,.6);
+}
+.hero-overlay-sub {
+  font-size: 17px; font-weight: 300;
+  color: var(--ink-2); line-height: 1.7;
+  max-width: 560px;
+  text-shadow: 0 1px 16px rgba(0,0,0,.6);
+}
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 32px; right: 60px;
+  z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px; height: 40px;
+  background: var(--muted);
+  animation: scroll-line 2s ease-in-out infinite;
+}
+@keyframes scroll-line {
+  0%, 100% { opacity: .3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(.6); }
+}
+
+/* ─── ABOUT BODY ─── */
+.about-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px 100px;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+.about-lede {
+  font-size: 20px; font-weight: 300; font-style: italic;
+  color: var(--ink-2); line-height: 1.65;
+  padding-right: 24px;
+  border-right: 1px solid var(--line);
+}
+.about-desc p {
+  font-size: 15px; font-weight: 300;
+  color: var(--ink-3); margin-bottom: 16px; line-height: 1.8;
+}
+.about-desc p:last-child { margin-bottom: 0; }
+
+/* ─── PLATFORM BLOCK ─── */
+.platform-section {
+  border-top: 1px solid var(--line);
+  padding-top: 72px;
+}
+.platform-text p {
+  font-size: 15px; font-weight: 300;
+  color: var(--ink-2); margin-bottom: 18px;
+  line-height: 1.8; max-width: 680px;
+}
+.platform-text p:last-child { margin-bottom: 0; }
+
+/* ─── NAV CARDS ─── */
+.nav-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+  padding-top: 64px;
+}
+.nav-card {
+  display: flex; flex-direction: column;
+  gap: 12px;
+  padding: 28px 26px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color .22s, transform .22s, box-shadow .22s;
+  position: relative; overflow: hidden;
+}
+.nav-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--amber);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+}
+.nav-card:hover { border-color: var(--line-2); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+.nav-card:hover::after { transform: scaleX(1); }
+.nav-card-arrow { color: var(--muted); font-size: 20px; align-self: flex-end; transition: transform .2s, color .2s; }
+.nav-card:hover .nav-card-arrow { transform: translate(3px,-3px); color: var(--amber); }
+.nav-card-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--amber);
+}
+.nav-card-title {
+  font-size: 20px; font-weight: 600;
+  color: var(--ink); letter-spacing: -.02em;
+}
+.nav-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .nav-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .about-body { padding: 48px 20px 60px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-lede { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+  .hero-overlay { padding: 0 24px 52px; }
+  .hero-scroll-hint { display: none; }
+  .nav-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-wrap">
+      <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Travel Group</span>
+      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="members.html">Members</a>
+    <a href="logo.html">Logo</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">
+        Expertise
+        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Lost LeBlanc</span>
+          <span class="nav-dropdown-item-sub">임지우 Julie Yim · Luxury Travel</span>
+        </a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Indigo Traveller</span>
+          <span class="nav-dropdown-item-sub">배주현 Juhyun Bae · Conflict-Zone</span>
+        </a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Mark Wiens</span>
+          <span class="nav-dropdown-item-sub">김진완 Jinwan Kim · Food & Travel</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Finn Whitaker</span>
+          <span class="nav-dropdown-item-sub">김대환 Dae Hwan Kim · Slow Travel</span>
+        </a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Via Li</span>
+          <span class="nav-dropdown-item-sub">배주이 Juyi Bae · Solo Female Travel</span>
+        </a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Drew Binsky</span>
+          <span class="nav-dropdown-item-sub">고태영 Taeyoung Koh · Country Count</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Paddy Doyle</span>
+          <span class="nav-dropdown-item-sub">최영빈 Youngbin Choi · Alt Tourism</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<main>
+  <div class="hero-image-block">
+    <div class="hero-image-placeholder">
+      <span class="hero-image-placeholder-text">Title image — coming soon</span>
+    </div>
+    <div class="hero-overlay">
+      <div class="hero-overlay-eyebrow">EST 240 · Visual Rhetoric</div>
+      <h1>Travel<br>Group</h1>
+      <p class="hero-overlay-sub">Analyzing how YouTube travel channels construct meaning, authority, and desire through visual rhetoric.</p>
+    </div>
+    <div class="hero-scroll-hint">Scroll</div>
+  </div>
+
+  <!-- ABOUT BODY -->
+  <div class="about-body">
+    <div class="about-grid">
+      <p class="about-lede">
+        How do travel channels on YouTube build the grammar of wanderlust — and what do they leave out?
+      </p>
+      <div class="about-desc">
+        <p>This group project investigates the genre of travel documentary on YouTube — a medium that has fundamentally reshaped how people understand distant places, tourism, and the self. Each member analyzes a distinct channel, applying classical film theory and formal audiovisual grammar to reveal the constructed nature of what appears spontaneous.</p>
+        <p>Our shared focus is the travel genre because it sits at the intersection of spectacle and intimacy, where drone cinematography meets handheld confession, and where the desire for authentic experience is itself mediated by highly crafted visual systems.</p>
+      </div>
+    </div>
+
+    <!-- Platform -->
+    <div class="platform-section">
+      <div class="section-label">About the Platform</div>
+      <h2 style="font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.025em;color:var(--ink);line-height:1.2;margin-bottom:32px;">Travel YouTube: Genre, Grammar, and Scale</h2>
+      <div class="platform-text">
+        <p>YouTube has become the dominant platform for travel media, displacing traditional broadcast documentary with a model that fuses mass reach, algorithmic distribution, and the aesthetic of personal testimony. Travel channels operate within a genre that borrows from broadcast journalism, cinema vérité, and the personal essay — yet functions under entirely different economic and social conditions.</p>
+        <p>Understanding the visual rhetoric of travel YouTube requires reading both what is shown and what is systematically omitted: staged encounters, promotional partnerships, the selection bias toward photogenic landscapes, and the anchoring of polysemic images through authoritative narration. Each member of this group analyzes a distinct channel, applying classical film theory to reveal the constructed nature of what appears spontaneous.</p>
+      </div>
+    </div>
+
+    <!-- Quick-nav cards to other pages -->
+    <div class="nav-cards">
+      <a href="members.html" class="nav-card">
+        <span class="nav-card-label">Section 01</span>
+        <div class="nav-card-title">Members</div>
+        <p class="nav-card-desc">Meet the seven analysts and their assigned travel YouTube channels.</p>
+        <span class="nav-card-arrow">↗</span>
+      </a>
+      <a href="logo.html" class="nav-card">
+        <span class="nav-card-label">Section 02</span>
+        <div class="nav-card-title">Group Logo</div>
+        <p class="nav-card-desc">Design rationale — palette, form, and the shared visual identity system.</p>
+        <span class="nav-card-arrow">↗</span>
+      </a>
+      <a href="expertise.html" class="nav-card">
+        <span class="nav-card-label">Section 03</span>
+        <div class="nav-card-title">Expertise Pages</div>
+        <p class="nav-card-desc">Seven in-depth channel analyses applying a shared visual rhetoric framework.</p>
+        <span class="nav-card-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-title">Travel Group — EST 240</div>
+      <div class="footer-meta">SUNY Korea · Visual Rhetoric &amp; IT · Prof. Pennings · Spring 2026</div>
+    </div>
+    <div class="footer-members">
+      <span class="footer-member-dot">임지우</span>
+      <span class="footer-member-dot">배주현</span>
+      <span class="footer-member-dot">김진완</span>
+      <span class="footer-member-dot">김대환</span>
+      <span class="footer-member-dot">배주이</span>
+      <span class="footer-member-dot">고태영</span>
+      <span class="footer-member-dot">최영빈</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

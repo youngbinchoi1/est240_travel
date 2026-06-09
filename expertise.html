@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Expertise — Travel Group EST 240</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* ─── EXPERTISE GRID ─── */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.expertise-card {
+  display: flex; flex-direction: column;
+  gap: 14px;
+  padding: 30px 28px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color .22s, background .22s, transform .22s;
+  position: relative; overflow: hidden;
+}
+.expertise-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--amber);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+}
+.expertise-card:hover { border-color: var(--line-2); background: var(--bg-4); transform: translateY(-3px); }
+.expertise-card:hover::after { transform: scaleX(1); }
+
+.expertise-card-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+}
+.expertise-member-tag {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber);
+}
+.expertise-arrow {
+  color: var(--muted); font-size: 18px;
+  transition: transform .2s, color .2s; line-height: 1;
+}
+.expertise-card:hover .expertise-arrow { transform: translate(3px,-3px); color: var(--amber); }
+
+.expertise-card-title {
+  font-size: 22px; font-weight: 600;
+  color: var(--ink); letter-spacing: -.02em; line-height: 1.2;
+}
+.expertise-card-channel {
+  font-size: 12px; font-weight: 400;
+  color: var(--muted); letter-spacing: .08em; text-transform: uppercase;
+}
+.expertise-card-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--ink-3); line-height: 1.65;
+  margin-top: 4px;
+}
+
+/* Divider label row */
+.grid-label {
+  grid-column: 1 / -1;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+}
+.grid-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+@media (max-width: 720px) {
+  .expertise-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-wrap">
+      <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Travel Group</span>
+      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="members.html">Members</a>
+    <a href="logo.html">Logo</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger" style="color:var(--amber);background:var(--amber-xs);">
+        Expertise
+        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Lost LeBlanc</span>
+          <span class="nav-dropdown-item-sub">임지우 Julie Yim · Luxury Travel</span>
+        </a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Indigo Traveller</span>
+          <span class="nav-dropdown-item-sub">배주현 Juhyun Bae · Conflict-Zone</span>
+        </a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Mark Wiens</span>
+          <span class="nav-dropdown-item-sub">김진완 Jinwan Kim · Food & Travel</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Finn Whitaker</span>
+          <span class="nav-dropdown-item-sub">김대환 Dae Hwan Kim · Slow Travel</span>
+        </a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Via Li</span>
+          <span class="nav-dropdown-item-sub">배주이 Juyi Bae · Solo Female Travel</span>
+        </a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Drew Binsky</span>
+          <span class="nav-dropdown-item-sub">고태영 Taeyoung Koh · Country Count</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Paddy Doyle</span>
+          <span class="nav-dropdown-item-sub">최영빈 Youngbin Choi · Alt Tourism</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main>
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Individual Channel Analyses</div>
+    <h1>Expertise Pages</h1>
+    <p class="page-hero-desc">Seven in-depth visual rhetoric analyses — each member applies a shared framework of mise-en-scène, editing, and narrative anchoring to a distinct travel YouTube channel.</p>
+  </div>
+
+  <div class="expertise-grid">
+
+    <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">임지우 · Julie Yim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Lost LeBlanc</div>
+      <div class="expertise-card-channel">YouTube · Luxury Travel Documentary</div>
+      <div class="expertise-card-desc">Cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</div>
+    </a>
+
+    <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">배주현 · Juhyun Bae</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Indigo Traveller</div>
+      <div class="expertise-card-channel">YouTube · Conflict-Zone Travel</div>
+      <div class="expertise-card-desc">Nick Fisher's risk rhetoric, humanitarian aesthetics, and the grammar of journalism in travel documentary.</div>
+    </a>
+
+    <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">김진완 · Jinwan Kim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Mark Wiens</div>
+      <div class="expertise-card-channel">YouTube · Food &amp; Travel</div>
+      <div class="expertise-card-desc">Close-up reaction shots, street-food mise-en-scène, and the semiotics of taste as cultural encounter.</div>
+    </a>
+
+    <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">김대환 · Dae Hwan Kim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Finn Whitaker</div>
+      <div class="expertise-card-channel">YouTube · Slow Travel</div>
+      <div class="expertise-card-desc">Minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</div>
+    </a>
+
+    <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">배주이 · Juyi Bae</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Via Li</div>
+      <div class="expertise-card-channel">YouTube · Solo Female Travel</div>
+      <div class="expertise-card-desc">Safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</div>
+    </a>
+
+    <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">고태영 · Taeyoung Koh</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Drew Binsky</div>
+      <div class="expertise-card-channel">YouTube · Extreme Country Count</div>
+      <div class="expertise-card-desc">Rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</div>
+    </a>
+
+    <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">최영빈 · Youngbin Choi</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Paddy Doyle</div>
+      <div class="expertise-card-channel">YouTube · Alternative Tourism</div>
+      <div class="expertise-card-desc">Immersive drone composition, invisible editing, and the media anchor persona in Southeast Asia travel documentary.</div>
+    </a>
+
+  </div>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-title">Travel Group — EST 240</div>
+      <div class="footer-meta">SUNY Korea · Visual Rhetoric &amp; IT · Prof. Pennings · Spring 2026</div>
+    </div>
+    <div class="footer-members">
+      <span class="footer-member-dot">임지우</span>
+      <span class="footer-member-dot">배주현</span>
+      <span class="footer-member-dot">김진완</span>
+      <span class="footer-member-dot">김대환</span>
+      <span class="footer-member-dot">배주이</span>
+      <span class="footer-member-dot">고태영</span>
+      <span class="footer-member-dot">최영빈</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

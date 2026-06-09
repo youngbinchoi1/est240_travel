@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Group Logo — Travel Group EST 240</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* ─── LOGO LAYOUT ─── */
+.logo-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+.logo-display {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 28px;
+  position: sticky; top: calc(var(--nav-h) + 32px);
+}
+
+.logo-canvas {
+  width: 100%; aspect-ratio: 1; max-width: 360px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+.logo-canvas img { width: 75%; height: 75%; object-fit: contain; }
+.logo-canvas::after {
+  content: '';
+  position: absolute; inset: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(237,208,122,.12);
+  animation: logo-pulse 3.5s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .25; transform: scale(1.04); }
+}
+
+.logo-scales {
+  display: flex; align-items: flex-end; gap: 20px;
+}
+.logo-scale-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+}
+.logo-scale-item img { object-fit: contain; }
+.logo-scale-label {
+  font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ─── DESIGN NOTES ─── */
+.logo-design-notes {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.logo-note {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.logo-note:first-child { padding-top: 0; }
+.logo-note:last-child { border-bottom: none; }
+
+.logo-note-head {
+  display: flex; align-items: center;
+  gap: 12px; margin-bottom: 12px;
+}
+.logo-note-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--amber-lt);
+  border: 1px solid rgba(237,208,122,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--amber);
+  flex-shrink: 0; letter-spacing: 0;
+}
+.logo-note-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--ink); letter-spacing: -.01em;
+}
+.logo-note-body {
+  font-size: 14px; font-weight: 300;
+  color: var(--ink-3); line-height: 1.8;
+  padding-left: 42px;
+}
+
+@media (max-width: 860px) {
+  .logo-layout { grid-template-columns: 1fr; }
+  .logo-display { position: static; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-wrap">
+      <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Travel Group</span>
+      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="members.html">Members</a>
+    <a href="logo.html" class="active">Logo</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">
+        Expertise
+        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Lost LeBlanc</span>
+          <span class="nav-dropdown-item-sub">임지우 Julie Yim · Luxury Travel</span>
+        </a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Indigo Traveller</span>
+          <span class="nav-dropdown-item-sub">배주현 Juhyun Bae · Conflict-Zone</span>
+        </a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Mark Wiens</span>
+          <span class="nav-dropdown-item-sub">김진완 Jinwan Kim · Food & Travel</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Finn Whitaker</span>
+          <span class="nav-dropdown-item-sub">김대환 Dae Hwan Kim · Slow Travel</span>
+        </a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Via Li</span>
+          <span class="nav-dropdown-item-sub">배주이 Juyi Bae · Solo Female Travel</span>
+        </a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Drew Binsky</span>
+          <span class="nav-dropdown-item-sub">고태영 Taeyoung Koh · Country Count</span>
+        </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="nav-dropdown-item">
+          <span class="nav-dropdown-item-name">Paddy Doyle</span>
+          <span class="nav-dropdown-item-sub">최영빈 Youngbin Choi · Alt Tourism</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main>
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Group Logo</div>
+    <h1>Identity Design</h1>
+    <p class="page-hero-desc">Rationale behind the mark — how palette, form, and scale choices encode the group's analytical framework and shared visual identity.</p>
+  </div>
+
+  <div class="logo-layout">
+
+    <!-- Logo display — sticky on desktop -->
+    <div class="logo-display">
+      <div class="logo-canvas">
+        <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
+      </div>
+      <div class="logo-scales">
+        <div class="logo-scale-item">
+          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo large" width="64" height="64" style="object-fit:contain;">
+          <span class="logo-scale-label">Large</span>
+        </div>
+        <div class="logo-scale-item">
+          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo medium" width="40" height="40" style="object-fit:contain;">
+          <span class="logo-scale-label">Medium</span>
+        </div>
+        <div class="logo-scale-item">
+          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo small" width="24" height="24" style="object-fit:contain;">
+          <span class="logo-scale-label">Small</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design notes -->
+    <div class="logo-design-notes">
+
+      <div class="logo-note">
+        <div class="logo-note-head">
+          <span class="logo-note-num">1</span>
+          <span class="logo-note-title">Globe + Pin — Denotation</span>
+        </div>
+        <p class="logo-note-body">The primary mark combines a wireframe globe with a map pin. At the denotative level, this communicates the group's subject matter directly: international travel, geography, and place. The wireframe globe references cartographic tradition and signals that the group's analytical framework is global in scope.</p>
+      </div>
+
+      <div class="logo-note">
+        <div class="logo-note-head">
+          <span class="logo-note-num">2</span>
+          <span class="logo-note-title">Amber on Black — Connotation</span>
+        </div>
+        <p class="logo-note-body">The amber-on-black palette connotes warmth, distance, and the quality of golden-hour light that defines travel photography. Against a near-black field, the amber reads as luminous and isolated — a single point of light on a dark map, evoking both adventure and the analogue aesthetics of vintage cartography.</p>
+      </div>
+
+      <div class="logo-note">
+        <div class="logo-note-head">
+          <span class="logo-note-num">3</span>
+          <span class="logo-note-title">Wireframe Reduction — Scalability</span>
+        </div>
+        <p class="logo-note-body">The globe is rendered as a minimal wireframe rather than a filled form. This choice ensures legibility at favicon scale, where complex illustrations collapse. The reduction to meridian lines and a single pin creates a mark that works across favicon, nav badge, and full-bleed header without loss of meaning.</p>
+      </div>
+
+      <div class="logo-note">
+        <div class="logo-note-head">
+          <span class="logo-note-num">4</span>
+          <span class="logo-note-title">Shared Identity with Personal Marks</span>
+        </div>
+        <p class="logo-note-body">The group logo is designed to function as a family with each member's personal mark. The shared amber accent and dark background establish visual continuity across pages, while the distinct forms — globe for the group, individual typographic marks for members — encode the collective-vs.-individual dynamic at the heart of the group project.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-title">Travel Group — EST 240</div>
+      <div class="footer-meta">SUNY Korea · Visual Rhetoric &amp; IT · Prof. Pennings · Spring 2026</div>
+    </div>
+    <div class="footer-members">
+      <span class="footer-member-dot">임지우</span>
+      <span class="footer-member-dot">배주현</span>
+      <span class="footer-member-dot">김진완</span>
+      <span class="footer-member-dot">김대환</span>
+      <span class="footer-member-dot">배주이</span>
+      <span class="footer-member-dot">고태영</span>
+      <span class="footer-member-dot">최영빈</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
