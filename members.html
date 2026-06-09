@@ -18,56 +18,48 @@
   --line:      #262220;
   --line-2:    #302c28;
   --amber:     #edd07a;
-  --amber-dk:  #c9a94e;
   --amber-lt:  #251f0c;
   --amber-xs:  #1a1608;
   --nav-h:     64px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body {
   background: var(--bg); color: var(--ink);
   font-family: 'DM Sans', sans-serif;
   font-size: 16px; line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 ::selection { background: var(--amber); color: var(--bg); }
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-/* NAV */
+/* ─── TOP NAV ─── */
 .top-nav {
   position: fixed; top: 0; left: 0; right: 0;
-  height: var(--nav-h);
-  background: rgba(13,13,13,.92);
+  height: var(--nav-h); background: rgba(13,13,13,.92);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 32px; z-index: 300;
 }
-
-.nav-brand {
-  display: flex; align-items: center; gap: 14px; text-decoration: none;
-}
-
+.nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .nav-logo-wrap {
   width: 38px; height: 38px; border-radius: 50%;
   border: 1.5px solid var(--line-2);
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden; background: var(--bg-3); flex-shrink: 0;
-  transition: border-color .2s;
+  overflow: hidden; background: var(--bg-3); flex-shrink: 0; transition: border-color .2s;
 }
 .nav-brand:hover .nav-logo-wrap { border-color: var(--amber); }
 .nav-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
-
 .nav-brand-text { display: flex; flex-direction: column; gap: 1px; }
 .nav-brand-name { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); line-height: 1; }
 .nav-brand-sub { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
-
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a {
   font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
@@ -77,123 +69,185 @@ body {
 .nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
 .nav-links a.active { color: var(--amber); }
 
-/* LAYOUT */
-main {
-  max-width: 1100px; margin: 0 auto;
-  padding: calc(var(--nav-h) + 60px) 40px 100px;
+/* ─── SCROLL DOTS ─── */
+.scroll-dots {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 200;
+}
+.scroll-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--line-2); border: 1px solid var(--muted);
+  cursor: pointer; transition: background .2s, transform .2s;
+  display: block;
+}
+.scroll-dot.active { background: var(--amber); transform: scale(1.5); border-color: var(--amber); }
+.scroll-dot:hover { background: var(--ink-3); }
+
+/* ─── MEMBER SLIDES ─── */
+.members-wrapper {
+  padding-top: var(--nav-h);
 }
 
-/* PAGE HEADER */
-.page-header { margin-bottom: 60px; }
-
-.section-label {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 16px;
-}
-.section-label::before {
-  content: ''; display: block; width: 22px; height: 2px; background: var(--amber);
-}
-
-.page-header h1 {
-  font-size: clamp(28px, 4vw, 44px); font-weight: 600;
-  letter-spacing: -.03em; color: var(--ink); line-height: 1.15;
-  margin-bottom: 16px;
-}
-
-.page-header p {
-  font-size: 15px; font-weight: 300; color: var(--ink-3);
-  max-width: 560px; line-height: 1.75;
-}
-
-/* MEMBERS GRID */
-.members-grid {
+.member-slide {
+  height: calc(100vh - var(--nav-h));
+  scroll-snap-align: start;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
 }
 
-.member-card {
-  background: var(--bg-3); border: 1px solid var(--line);
-  border-radius: 12px; overflow: hidden; text-decoration: none;
-  display: flex; flex-direction: column;
-  transition: border-color .22s, transform .22s, box-shadow .22s;
+/* Left — image panel */
+.slide-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  padding: 48px 40px;
   position: relative;
 }
 
-.member-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px; background: var(--amber);
-  transform: scaleY(0); transform-origin: bottom;
-  transition: transform .28s cubic-bezier(.25,.8,.25,1);
+.slide-image-bg { display: none; }
+
+/* Floating avatar card */
+.slide-avatar-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.member-card:hover {
-  border-color: var(--line-2);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,.5);
-}
-.member-card:hover::before { transform: scaleY(1); }
-
-.member-avatar {
-  width: 100%; aspect-ratio: 4/3;
-  background: var(--bg-4); border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-}
-.member-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-.member-avatar-placeholder {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: var(--bg-3); border: 2px solid var(--line-2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; font-weight: 700; color: var(--amber); letter-spacing: -.03em;
+.slide-avatar-inner {
+  position: relative;
+  width: min(280px, 72%);
+  aspect-ratio: 3/4;
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
 }
 
-.member-personal-logo {
-  position: absolute; top: 12px; right: 12px;
-  width: 40px; height: 40px;
-  background: rgba(13,13,13,.75); backdrop-filter: blur(6px);
-  border-radius: 8px; border: 1px solid var(--line-2);
+/* Monogram inside the card */
+.slide-monogram {
+  font-size: clamp(64px, 10vw, 110px);
+  font-weight: 700;
+  letter-spacing: -.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(237,208,122,.3);
+  line-height: 1;
+  user-select: none;
+}
+
+.slide-index-label {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px; font-weight: 500; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Personal logo badge */
+.slide-personal-logo {
+  position: absolute; top: -14px; right: -14px;
+  width: 44px; height: 44px;
+  background: var(--bg-2); backdrop-filter: blur(8px);
+  border-radius: 10px; border: 1px solid var(--line-2);
   display: flex; align-items: center; justify-content: center; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
 }
-.member-personal-logo img { width: 28px; height: 28px; object-fit: contain; }
-.member-personal-logo svg { width: 26px; height: 26px; }
+.slide-personal-logo img { width: 28px; height: 28px; object-fit: contain; }
+.slide-personal-logo svg { width: 28px; height: 28px; }
 
-.member-info {
-  padding: 22px 24px; flex: 1;
-  display: flex; flex-direction: column; gap: 6px;
-}
-
-.member-name { font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
-.member-role { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); }
-.member-bio { font-size: 13px; font-weight: 300; color: var(--ink-3); line-height: 1.65; margin-top: 8px; }
-
-.member-footer {
-  padding: 14px 24px; border-top: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+/* Right — info panel */
+.slide-info {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 60px 64px;
+  position: relative;
 }
 
-.member-contact {
-  font-size: 12px; font-weight: 400; color: var(--muted); text-decoration: none;
-  transition: color .18s; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+/* Amber accent line on left edge of info panel */
+.slide-info::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 2px; background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+  opacity: .4;
 }
-.member-contact:hover { color: var(--amber); }
 
-.member-link-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--amber); background: var(--amber-lt);
-  border: 1px solid rgba(237,208,122,.15);
-  padding: 5px 12px; border-radius: 20px; flex-shrink: 0;
-  text-decoration: none; transition: background .18s, color .18s;
+.slide-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
 }
-.member-link-pill:hover { background: var(--amber); color: var(--bg); }
-.member-link-pill svg { width: 10px; height: 10px; }
+.slide-eyebrow::before {
+  content: ''; display: block; width: 20px; height: 1.5px; background: var(--amber);
+}
 
-/* FOOTER */
-footer { background: var(--bg-2); border-top: 1px solid var(--line); }
+.slide-name {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; letter-spacing: -.04em;
+  color: var(--ink); line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+
+.slide-channel-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 32px;
+}
+
+.slide-channel-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--bg);
+  background: var(--amber); padding: 5px 14px; border-radius: 20px;
+}
+
+.slide-channel-type {
+  font-size: 12px; font-weight: 300; color: var(--muted); font-style: italic;
+}
+
+.slide-divider {
+  width: 40px; height: 1px; background: var(--line-2); margin-bottom: 28px;
+}
+
+.slide-bio {
+  font-size: 15px; font-weight: 300; color: var(--ink-2);
+  line-height: 1.8; max-width: 420px; margin-bottom: 40px;
+}
+
+.slide-actions {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+
+.slide-link-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber);
+  background: var(--amber-lt); border: 1px solid rgba(237,208,122,.2);
+  padding: 10px 20px; border-radius: 8px; text-decoration: none;
+  transition: background .18s, color .18s, border-color .18s;
+}
+.slide-link-btn:hover { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+.slide-link-btn svg { width: 11px; height: 11px; }
+
+.slide-email {
+  font-size: 12px; font-weight: 400; color: var(--muted);
+  text-decoration: none; transition: color .18s;
+  letter-spacing: .02em;
+}
+.slide-email:hover { color: var(--amber); }
+
+/* ─── FOOTER ─── */
+footer {
+  scroll-snap-align: start;
+  background: var(--bg-2); border-top: 1px solid var(--line);
+}
 .footer-inner {
   max-width: 1100px; margin: 0 auto; padding: 36px 40px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -207,21 +261,35 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
   border: 1px solid var(--line); border-radius: 20px; letter-spacing: .06em;
 }
 
-/* RESPONSIVE */
-@media (max-width: 720px) {
-  main { padding: calc(var(--nav-h) + 40px) 20px 60px; }
-  .members-grid { grid-template-columns: 1fr; }
+/* ─── RESPONSIVE ─── */
+@media (max-width: 800px) {
+  .member-slide {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - var(--nav-h));
+  }
+  .slide-image {
+    border-right: none; border-bottom: 1px solid var(--line);
+    padding: 36px 28px; min-height: 260px;
+  }
+  .slide-avatar-inner { width: min(160px, 60%); }
+  .slide-info { padding: 32px 28px; }
+  .slide-info::before { display: none; }
+  .nav-links { display: none; }
+  .scroll-dots { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .footer-members { justify-content: flex-start; }
-  .nav-links { display: none; }
 }
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
   * { transition-duration: .01ms !important; }
 }
 </style>
 </head>
 <body>
 
+<!-- ─── TOP NAV ─── -->
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">
     <div class="nav-logo-wrap">
@@ -240,159 +308,241 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
   </div>
 </nav>
 
-<main>
-  <div class="page-header">
-    <div class="section-label">Group Members</div>
-    <h1>The Team</h1>
-    <p>Seven students, seven channels — each bringing a distinct analytical lens to the visual rhetoric of YouTube travel media.</p>
-  </div>
+<!-- ─── SCROLL DOTS ─── -->
+<nav class="scroll-dots" id="scrollDots" aria-label="Member navigation">
+  <a class="scroll-dot active" href="#m1" aria-label="Julie Yim"></a>
+  <a class="scroll-dot" href="#m2" aria-label="Juhyun Bae"></a>
+  <a class="scroll-dot" href="#m3" aria-label="Jinwan Kim"></a>
+  <a class="scroll-dot" href="#m4" aria-label="Dae Hwan Kim"></a>
+  <a class="scroll-dot" href="#m5" aria-label="Juyi Bae"></a>
+  <a class="scroll-dot" href="#m6" aria-label="Taeyoung Koh"></a>
+  <a class="scroll-dot" href="#m7" aria-label="Youngbin Choi"></a>
+</nav>
 
-  <div class="members-grid">
+<!-- ─── MEMBER SLIDES ─── -->
+<div class="members-wrapper">
 
-    <!-- 1 — Julie Yim -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">JY</div>
-      </div>
-      <div class="member-info">
-        <div class="member-name">임지우 <span style="font-weight:300;color:var(--ink-3);">Julie Yim</span></div>
-        <div class="member-role">Lost LeBlanc</div>
-        <div class="member-bio">Analyzes Lost LeBlanc's luxury travel documentary style — cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</div>
-      </div>
-      <div class="member-footer">
-        <span class="member-contact">julie.yim@stonybrook.edu</span>
-        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="member-link-pill">
-          Page
-          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- 2 — Juhyun Bae -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">JB</div>
-        <div class="member-personal-logo">
-          <svg viewBox="0 0 120 104" xmlns="http://www.w3.org/2000/svg">
-            <text x="62" y="84" font-family="Georgia,serif" font-size="86" font-weight="600" fill="#edd07a" text-anchor="middle" style="letter-spacing:-4px;">JB</text>
-          </svg>
+  <!-- 1 — Julie Yim -->
+  <section class="member-slide" id="m1">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">JY</div>
         </div>
       </div>
-      <div class="member-info">
-        <div class="member-name">배주현 <span style="font-weight:300;color:var(--ink-3);">Juhyun Bae</span></div>
-        <div class="member-role">Indigo Traveller</div>
-        <div class="member-bio">Analyzes Nick Fisher's Indigo Traveller channel — conflict-zone journalism aesthetics, risk rhetoric, and the grammar of humanitarian travel documentary.</div>
+      <span class="slide-index-label">01 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Julie Yim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Lost LeBlanc</span>
+        <span class="slide-channel-type">Luxury Travel Documentary</span>
       </div>
-      <div class="member-footer">
-        <span class="member-contact">juhyun.bae@stonybrook.edu</span>
-        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="member-link-pill">
-          Page
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Lost LeBlanc's luxury travel documentary style — cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</p>
+      <div class="slide-actions">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="slide-link-btn">
+          Visit Page
           <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </a>
+        <a href="mailto:julie.yim@stonybrook.edu" class="slide-email">julie.yim@stonybrook.edu</a>
       </div>
     </div>
+  </section>
 
-    <!-- 3 — Jinwan Kim -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">JK</div>
-      </div>
-      <div class="member-info">
-        <div class="member-name">김진완 <span style="font-weight:300;color:var(--ink-3);">Jinwan Kim</span></div>
-        <div class="member-role">Mark Wiens</div>
-        <div class="member-bio">Analyzes Mark Wiens' food-travel hybrid channel — close-up reaction shots, street-food mise-en-scene, and the semiotics of taste as cultural encounter.</div>
-      </div>
-      <div class="member-footer">
-        <span class="member-contact">jinwan.kim@stonybrook.edu</span>
-        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="member-link-pill">
-          Page
-          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- 4 — Dae Hwan Kim -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">DK</div>
-      </div>
-      <div class="member-info">
-        <div class="member-name">김대환 <span style="font-weight:300;color:var(--ink-3);">Dae Hwan Kim</span></div>
-        <div class="member-role">Finn Whitaker</div>
-        <div class="member-bio">Analyzes Finn Whitaker's off-the-beaten-path channel — minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</div>
-      </div>
-      <div class="member-footer">
-        <span class="member-contact">daehwan.kim@stonybrook.edu</span>
-        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="member-link-pill">
-          Page
-          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- 5 — Juyi Bae -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">JB</div>
-      </div>
-      <div class="member-info">
-        <div class="member-name">배주이 <span style="font-weight:300;color:var(--ink-3);">Juyi Bae</span></div>
-        <div class="member-role">Via Li</div>
-        <div class="member-bio">Analyzes Via Li's solo female travel channel — safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</div>
-      </div>
-      <div class="member-footer">
-        <span class="member-contact">juyi.bae@stonybrook.edu</span>
-        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="member-link-pill">
-          Page
-          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- 6 — Taeyoung Koh -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">TK</div>
-      </div>
-      <div class="member-info">
-        <div class="member-name">고태영 <span style="font-weight:300;color:var(--ink-3);">Taeyoung Koh</span></div>
-        <div class="member-role">Drew Binsky</div>
-        <div class="member-bio">Analyzes Drew Binsky's world-record country-count channel — rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</div>
-      </div>
-      <div class="member-footer">
-        <span class="member-contact">taeyoung.koh@stonybrook.edu</span>
-        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="member-link-pill">
-          Page
-          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- 7 — Youngbin Choi -->
-    <div class="member-card">
-      <div class="member-avatar">
-        <div class="member-avatar-placeholder">YC</div>
-        <div class="member-personal-logo">
-          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/Y_logo.png" alt="Youngbin Choi logo" style="width:24px;height:24px;object-fit:contain;">
+  <!-- 2 — Juhyun Bae -->
+  <section class="member-slide" id="m2">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">JB</div>
+          <div class="slide-personal-logo">
+            <svg viewBox="0 0 120 104" xmlns="http://www.w3.org/2000/svg">
+              <text x="62" y="84" font-family="Georgia,serif" font-size="86" font-weight="600" fill="#edd07a" text-anchor="middle" style="letter-spacing:-4px;">JB</text>
+            </svg>
+          </div>
         </div>
       </div>
-      <div class="member-info">
-        <div class="member-name">최영빈 <span style="font-weight:300;color:var(--ink-3);">Youngbin Choi</span></div>
-        <div class="member-role">Paddy Doyle</div>
-        <div class="member-bio">Analyzes Paddy Doyle's Southeast Asia alternative-tourism channel — immersive drone composition, invisible editing, and the media anchor persona.</div>
+      <span class="slide-index-label">02 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Juhyun Bae</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Indigo Traveller</span>
+        <span class="slide-channel-type">Conflict-Zone Travel</span>
       </div>
-      <div class="member-footer">
-        <span class="member-contact">youngbin.choi@stonybrook.edu</span>
-        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="member-link-pill">
-          Page
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Nick Fisher's Indigo Traveller channel — conflict-zone journalism aesthetics, risk rhetoric, and the grammar of humanitarian travel documentary.</p>
+      <div class="slide-actions">
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="slide-link-btn">
+          Visit Page
           <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </a>
+        <a href="mailto:juhyun.bae@stonybrook.edu" class="slide-email">juhyun.bae@stonybrook.edu</a>
       </div>
     </div>
+  </section>
 
-  </div>
-</main>
+  <!-- 3 — Jinwan Kim -->
+  <section class="member-slide" id="m3">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">JK</div>
+        </div>
+      </div>
+      <span class="slide-index-label">03 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Jinwan Kim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Mark Wiens</span>
+        <span class="slide-channel-type">Food &amp; Travel</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Mark Wiens' food-travel hybrid channel — close-up reaction shots, street-food mise-en-scene, and the semiotics of taste as cultural encounter.</p>
+      <div class="slide-actions">
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="slide-link-btn">
+          Visit Page
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="mailto:jinwan.kim@stonybrook.edu" class="slide-email">jinwan.kim@stonybrook.edu</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- 4 — Dae Hwan Kim -->
+  <section class="member-slide" id="m4">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">DK</div>
+        </div>
+      </div>
+      <span class="slide-index-label">04 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Dae Hwan Kim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Finn Whitaker</span>
+        <span class="slide-channel-type">Slow Travel</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Finn Whitaker's off-the-beaten-path channel — minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</p>
+      <div class="slide-actions">
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="slide-link-btn">
+          Visit Page
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="mailto:daehwan.kim@stonybrook.edu" class="slide-email">daehwan.kim@stonybrook.edu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — Juyi Bae -->
+  <section class="member-slide" id="m5">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">JB</div>
+        </div>
+      </div>
+      <span class="slide-index-label">05 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Juyi Bae</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Via Li</span>
+        <span class="slide-channel-type">Solo Female Travel</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Via Li's solo female travel channel — safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</p>
+      <div class="slide-actions">
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="slide-link-btn">
+          Visit Page
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="mailto:juyi.bae@stonybrook.edu" class="slide-email">juyi.bae@stonybrook.edu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — Taeyoung Koh -->
+  <section class="member-slide" id="m6">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">TK</div>
+        </div>
+      </div>
+      <span class="slide-index-label">06 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Taeyoung Koh</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Drew Binsky</span>
+        <span class="slide-channel-type">Extreme Country Count</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Drew Binsky's world-record country-count channel — rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</p>
+      <div class="slide-actions">
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="slide-link-btn">
+          Visit Page
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="mailto:taeyoung.koh@stonybrook.edu" class="slide-email">taeyoung.koh@stonybrook.edu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — Youngbin Choi -->
+  <section class="member-slide" id="m7">
+    <div class="slide-image">
+      <div class="slide-image-bg"></div>
+      <div class="slide-avatar-wrap">
+        <div class="slide-avatar-inner">
+          <div class="slide-monogram">YC</div>
+          <div class="slide-personal-logo">
+            <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/Y_logo.png" alt="Youngbin Choi logo">
+          </div>
+        </div>
+      </div>
+      <span class="slide-index-label">07 / 07</span>
+    </div>
+    <div class="slide-info">
+      <div class="slide-eyebrow">Group Member</div>
+      <div class="slide-name">Youngbin Choi</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Paddy Doyle</span>
+        <span class="slide-channel-type">Alternative Tourism</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">Analyzes Paddy Doyle's Southeast Asia alternative-tourism channel — immersive drone composition, invisible editing, and the media anchor persona.</p>
+      <div class="slide-actions">
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="slide-link-btn">
+          Visit Page
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="mailto:youngbin.choi@stonybrook.edu" class="slide-email">youngbin.choi@stonybrook.edu</a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /members-wrapper -->
+
+<!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -400,16 +550,33 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
       <div class="footer-meta">SUNY Korea · Prof. Pennings · Spring 2026</div>
     </div>
     <div class="footer-members">
-      <span class="footer-member-dot">임지우</span>
-      <span class="footer-member-dot">배주현</span>
-      <span class="footer-member-dot">김진완</span>
-      <span class="footer-member-dot">김대환</span>
-      <span class="footer-member-dot">배주이</span>
-      <span class="footer-member-dot">고태영</span>
-      <span class="footer-member-dot">최영빈</span>
+      <span class="footer-member-dot">Julie Yim</span>
+      <span class="footer-member-dot">Juhyun Bae</span>
+      <span class="footer-member-dot">Jinwan Kim</span>
+      <span class="footer-member-dot">Dae Hwan Kim</span>
+      <span class="footer-member-dot">Juyi Bae</span>
+      <span class="footer-member-dot">Taeyoung Koh</span>
+      <span class="footer-member-dot">Youngbin Choi</span>
     </div>
   </div>
 </footer>
+
+<script>
+  // Update active dot on scroll
+  const slides = document.querySelectorAll('.member-slide');
+  const dots   = document.querySelectorAll('.scroll-dot');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = [...slides].indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
