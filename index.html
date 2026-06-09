@@ -1,186 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Travel Group — EST 240 Visual Rhetoric</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="shared.css"/>
 <style>
-/* ─── INDEX-ONLY STYLES ─── */
-main {
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  max-width: 100%;
+/* ─── TOKENS ─── */
+:root {
+  --bg:        #0d0d0d;
+  --bg-2:      #141414;
+  --bg-3:      #1a1a1a;
+  --bg-4:      #202020;
+  --ink:       #f0ece4;
+  --ink-2:     #c4bdb0;
+  --ink-3:     #8a8278;
+  --muted:     #5c5650;
+  --line:      #262220;
+  --line-2:    #302c28;
+  --amber:     #edd07a;
+  --amber-dk:  #c9a94e;
+  --amber-lt:  #251f0c;
+  --amber-xs:  #1a1608;
+  --nav-h:     64px;
 }
 
-/* ─── HERO — full-viewport ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--amber); color: var(--bg); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* ─── TOP NAV ─── */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(13,13,13,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 300;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.nav-logo-wrap {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: var(--bg-3);
+  flex-shrink: 0;
+  transition: border-color .2s;
+}
+
+.nav-brand:hover .nav-logo-wrap { border-color: var(--amber); }
+.nav-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+
+.nav-brand-text { display: flex; flex-direction: column; gap: 1px; }
+
+.nav-brand-name {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink); line-height: 1;
+}
+
+.nav-brand-sub { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+
+.nav-links { display: flex; align-items: center; gap: 4px; }
+
+.nav-links a {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+
+.nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-links a.active { color: var(--amber); }
+
+/* ─── LAYOUT ─── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--nav-h) 40px 100px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  margin-bottom: 96px;
+  margin-left: -40px;
+  margin-right: -40px;
+  margin-top: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
 .hero-image-block {
   position: relative;
   width: 100vw;
   height: 100vh;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--bg-3);
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
+
 .hero-image-block img {
-  position: absolute;
-  inset: 0; width: 100%; height: 100%;
-  object-fit: cover; opacity: .5;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: .7;
 }
+
 .hero-image-placeholder {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
 }
+
 .hero-image-placeholder-text {
   font-size: 11px; font-weight: 500;
   letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted);
-  border: 1px dashed var(--line-2);
+  color: var(--muted); border: 1px dashed var(--line-2);
   padding: 10px 20px; border-radius: 6px;
 }
-.hero-overlay {
-  position: relative;
-  z-index: 2;
-  padding: 0 60px 72px;
-  max-width: 800px;
-}
-.hero-overlay-eyebrow {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: .24em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 20px;
-  display: flex; align-items: center; gap: 10px;
-}
-.hero-overlay-eyebrow::before {
-  content: ''; display: block;
-  width: 28px; height: 2px; background: var(--amber);
-}
-.hero-overlay h1 {
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 700; letter-spacing: -.04em;
-  line-height: 1.0; color: var(--ink);
-  margin-bottom: 28px;
-  text-shadow: 0 2px 40px rgba(0,0,0,.6);
-}
-.hero-overlay-sub {
-  font-size: 17px; font-weight: 300;
-  color: var(--ink-2); line-height: 1.7;
-  max-width: 560px;
-  text-shadow: 0 1px 16px rgba(0,0,0,.6);
-}
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 32px; right: 60px;
-  z-index: 2;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 500;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted);
-}
-.hero-scroll-hint::after {
-  content: '';
-  display: block;
-  width: 1px; height: 40px;
-  background: var(--muted);
-  animation: scroll-line 2s ease-in-out infinite;
-}
-@keyframes scroll-line {
-  0%, 100% { opacity: .3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(.6); }
-}
 
-/* ─── ABOUT BODY ─── */
-.about-body {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 40px 100px;
-}
-.about-grid {
+.hero-content { padding: 72px 40px 0; }
+
+.hero-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 40px;
   align-items: start;
-  margin-bottom: 80px;
 }
-.about-lede {
-  font-size: 20px; font-weight: 300; font-style: italic;
-  color: var(--ink-2); line-height: 1.65;
-  padding-right: 24px;
-  border-right: 1px solid var(--line);
-}
-.about-desc p {
-  font-size: 15px; font-weight: 300;
-  color: var(--ink-3); margin-bottom: 16px; line-height: 1.8;
-}
-.about-desc p:last-child { margin-bottom: 0; }
 
-/* ─── PLATFORM BLOCK ─── */
-.platform-section {
-  border-top: 1px solid var(--line);
-  padding-top: 72px;
+.hero-lede {
+  font-size: 18px; font-weight: 300; font-style: italic;
+  color: var(--ink-2); line-height: 1.7;
+  padding-right: 16px; border-right: 1px solid var(--line);
 }
-.platform-text p {
+
+.hero-desc p {
+  font-size: 15px; font-weight: 300;
+  color: var(--ink-3); margin-bottom: 14px;
+}
+.hero-desc p:last-child { margin-bottom: 0; }
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 88px;
+  padding-bottom: 88px;
+  border-bottom: 1px solid var(--line);
+}
+.section:last-of-type { border-bottom: none; margin-bottom: 0; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 22px; height: 2px; background: var(--amber);
+}
+
+.section > h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 600;
+  letter-spacing: -.025em; color: var(--ink);
+  line-height: 1.2; margin-bottom: 28px;
+}
+
+/* ─── YOUTUBE EXPLAINER ─── */
+.yt-explainer-text p {
   font-size: 15px; font-weight: 300;
   color: var(--ink-2); margin-bottom: 18px;
   line-height: 1.8; max-width: 680px;
 }
-.platform-text p:last-child { margin-bottom: 0; }
+.yt-explainer-text p:last-child { margin-bottom: 0; }
 
-/* ─── NAV CARDS ─── */
-.nav-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 80px;
-  border-top: 1px solid var(--line);
-  padding-top: 64px;
-}
-.nav-card {
-  display: flex; flex-direction: column;
-  gap: 12px;
-  padding: 28px 26px;
-  background: var(--bg-3);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: border-color .22s, transform .22s, box-shadow .22s;
-  position: relative; overflow: hidden;
-}
-.nav-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 2px; background: var(--amber);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .3s cubic-bezier(.25,.8,.25,1);
-}
-.nav-card:hover { border-color: var(--line-2); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.5); }
-.nav-card:hover::after { transform: scaleX(1); }
-.nav-card-arrow { color: var(--muted); font-size: 20px; align-self: flex-end; transition: transform .2s, color .2s; }
-.nav-card:hover .nav-card-arrow { transform: translate(3px,-3px); color: var(--amber); }
-.nav-card-label {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--amber);
-}
-.nav-card-title {
-  font-size: 20px; font-weight: 600;
-  color: var(--ink); letter-spacing: -.02em;
-}
-.nav-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+/* ─── FOOTER ─── */
+footer { background: var(--bg-2); border-top: 1px solid var(--line); }
 
-@media (max-width: 900px) {
-  .nav-cards { grid-template-columns: 1fr 1fr; }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 36px 40px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 24px;
 }
+
+.footer-brand { display: flex; flex-direction: column; gap: 4px; }
+.footer-title { font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: .06em; }
+.footer-meta { font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+
+.footer-members { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+.footer-member-dot {
+  font-size: 11px; color: var(--muted);
+  padding: 4px 10px; border: 1px solid var(--line);
+  border-radius: 20px; letter-spacing: .06em;
+}
+
+/* ─── RESPONSIVE ─── */
 @media (max-width: 720px) {
-  .about-body { padding: 48px 20px 60px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-lede { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
-  .hero-overlay { padding: 0 24px 52px; }
-  .hero-scroll-hint { display: none; }
-  .nav-cards { grid-template-columns: 1fr; }
+  main { padding: var(--nav-h) 20px 60px; }
+  .hero { margin-left: -20px; margin-right: -20px; }
+  .hero-content { padding: 48px 20px 0; }
+  .hero-body { grid-template-columns: 1fr; }
+  .hero-lede { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-members { justify-content: flex-start; }
+  .nav-links { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; }
 }
 </style>
 </head>
@@ -201,107 +260,43 @@ main {
     <a href="index.html" class="active">Home</a>
     <a href="members.html">Members</a>
     <a href="logo.html">Logo</a>
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-trigger">
-        Expertise
-        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="nav-dropdown-menu">
-        <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Lost LeBlanc</span>
-          <span class="nav-dropdown-item-sub">임지우 Julie Yim · Luxury Travel</span>
-        </a>
-        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Indigo Traveller</span>
-          <span class="nav-dropdown-item-sub">배주현 Juhyun Bae · Conflict-Zone</span>
-        </a>
-        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Mark Wiens</span>
-          <span class="nav-dropdown-item-sub">김진완 Jinwan Kim · Food & Travel</span>
-        </a>
-        <div class="nav-dropdown-divider"></div>
-        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Finn Whitaker</span>
-          <span class="nav-dropdown-item-sub">김대환 Dae Hwan Kim · Slow Travel</span>
-        </a>
-        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Via Li</span>
-          <span class="nav-dropdown-item-sub">배주이 Juyi Bae · Solo Female Travel</span>
-        </a>
-        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Drew Binsky</span>
-          <span class="nav-dropdown-item-sub">고태영 Taeyoung Koh · Country Count</span>
-        </a>
-        <div class="nav-dropdown-divider"></div>
-        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="nav-dropdown-item">
-          <span class="nav-dropdown-item-name">Paddy Doyle</span>
-          <span class="nav-dropdown-item-sub">최영빈 Youngbin Choi · Alt Tourism</span>
-        </a>
-      </div>
-    </div>
+    <a href="expertise.html">Expertise</a>
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
+<!-- ─── MAIN ─── -->
 <main>
-  <div class="hero-image-block">
-    <div class="hero-image-placeholder">
-      <span class="hero-image-placeholder-text">Title image — coming soon</span>
-    </div>
-    <div class="hero-overlay">
-      <div class="hero-overlay-eyebrow">EST 240 · Visual Rhetoric</div>
-      <h1>Travel<br>Group</h1>
-      <p class="hero-overlay-sub">Analyzing how YouTube travel channels construct meaning, authority, and desire through visual rhetoric.</p>
-    </div>
-    <div class="hero-scroll-hint">Scroll</div>
-  </div>
 
-  <!-- ABOUT BODY -->
-  <div class="about-body">
-    <div class="about-grid">
-      <p class="about-lede">
-        How do travel channels on YouTube build the grammar of wanderlust — and what do they leave out?
-      </p>
-      <div class="about-desc">
-        <p>This group project investigates the genre of travel documentary on YouTube — a medium that has fundamentally reshaped how people understand distant places, tourism, and the self. Each member analyzes a distinct channel, applying classical film theory and formal audiovisual grammar to reveal the constructed nature of what appears spontaneous.</p>
-        <p>Our shared focus is the travel genre because it sits at the intersection of spectacle and intimacy, where drone cinematography meets handheld confession, and where the desire for authentic experience is itself mediated by highly crafted visual systems.</p>
+  <!-- HERO / ABOUT -->
+  <section class="section hero" id="about">
+
+    <div class="hero-image-block">
+      <div class="hero-image-placeholder">
+        <span class="hero-image-placeholder-text">Title image — coming soon</span>
       </div>
     </div>
 
-    <!-- Platform -->
-    <div class="platform-section">
-      <div class="section-label">About the Platform</div>
-      <h2 style="font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.025em;color:var(--ink);line-height:1.2;margin-bottom:32px;">Travel YouTube: Genre, Grammar, and Scale</h2>
-      <div class="platform-text">
-        <p>YouTube has become the dominant platform for travel media, displacing traditional broadcast documentary with a model that fuses mass reach, algorithmic distribution, and the aesthetic of personal testimony. Travel channels operate within a genre that borrows from broadcast journalism, cinema vérité, and the personal essay — yet functions under entirely different economic and social conditions.</p>
-        <p>Understanding the visual rhetoric of travel YouTube requires reading both what is shown and what is systematically omitted: staged encounters, promotional partnerships, the selection bias toward photogenic landscapes, and the anchoring of polysemic images through authoritative narration. Each member of this group analyzes a distinct channel, applying classical film theory to reveal the constructed nature of what appears spontaneous.</p>
+    <div class="hero-content">
+      <div class="hero-body">
+        <p class="hero-lede">
+          Analyzing how YouTube travel channels construct meaning, authority, and desire through visual rhetoric.
+        </p>
+        <div class="hero-desc">
+          <p>This group project investigates the genre of travel documentary on YouTube — a medium that has fundamentally reshaped how people understand distant places, tourism, and the self. Each member analyzes a distinct channel, applying classical film theory and formal audiovisual grammar to reveal the constructed nature of what appears spontaneous.</p>
+          <p>Our shared focus is the travel genre because it sits at the intersection of spectacle and intimacy, where drone cinematography meets handheld confession, and where the desire for authentic experience is itself mediated by highly crafted visual systems.</p>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:56px;">About the Platform</div>
+      <h2>Travel YouTube: Genre, Grammar, and Scale</h2>
+
+      <div class="yt-explainer-text" style="margin-top:40px;">
+        <p>YouTube has become the dominant platform for travel media, displacing traditional broadcast documentary with a model that fuses mass reach, algorithmic distribution, and the aesthetic of personal testimony. Travel channels operate within a genre that borrows from broadcast journalism, cinema vérité, and the personal essay — yet functions under entirely different economic and social conditions. Creators must signal authenticity and spontaneity while relying on sophisticated production techniques — drone cinematography, continuity editing, and voice-over narration — to sustain audience attention and meet the platform's engagement demands.</p>
+        <p>Understanding the visual rhetoric of travel YouTube requires reading both what is shown and what is systematically omitted: staged encounters, promotional partnerships, the selection bias toward photogenic landscapes, and the anchoring of polysemic images through authoritative narration. Each member of this group analyzes a distinct channel, applying classical film theory to reveal the constructed nature of what appears spontaneous — and to examine how independent digital creators inherit and adapt legacy television grammar for a new era of audience.</p>
       </div>
     </div>
+  </section>
 
-    <!-- Quick-nav cards to other pages -->
-    <div class="nav-cards">
-      <a href="members.html" class="nav-card">
-        <span class="nav-card-label">Section 01</span>
-        <div class="nav-card-title">Members</div>
-        <p class="nav-card-desc">Meet the seven analysts and their assigned travel YouTube channels.</p>
-        <span class="nav-card-arrow">↗</span>
-      </a>
-      <a href="logo.html" class="nav-card">
-        <span class="nav-card-label">Section 02</span>
-        <div class="nav-card-title">Group Logo</div>
-        <p class="nav-card-desc">Design rationale — palette, form, and the shared visual identity system.</p>
-        <span class="nav-card-arrow">↗</span>
-      </a>
-      <a href="expertise.html" class="nav-card">
-        <span class="nav-card-label">Section 03</span>
-        <div class="nav-card-title">Expertise Pages</div>
-        <p class="nav-card-desc">Seven in-depth channel analyses applying a shared visual rhetoric framework.</p>
-        <span class="nav-card-arrow">↗</span>
-      </a>
-    </div>
-  </div>
 </main>
 
 <!-- ─── FOOTER ─── -->
