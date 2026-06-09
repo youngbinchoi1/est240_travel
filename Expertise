@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Expertise — Travel Group EST 240</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #0d0d0d;
+  --bg-2:      #141414;
+  --bg-3:      #1a1a1a;
+  --bg-4:      #202020;
+  --ink:       #f0ece4;
+  --ink-2:     #c4bdb0;
+  --ink-3:     #8a8278;
+  --muted:     #5c5650;
+  --line:      #262220;
+  --line-2:    #302c28;
+  --amber:     #edd07a;
+  --amber-dk:  #c9a94e;
+  --amber-lt:  #251f0c;
+  --amber-xs:  #1a1608;
+  --nav-h:     64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--amber); color: var(--bg); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* NAV */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); background: rgba(13,13,13,.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; z-index: 300;
+}
+.nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-wrap {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--line-2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--bg-3); flex-shrink: 0; transition: border-color .2s;
+}
+.nav-brand:hover .nav-logo-wrap { border-color: var(--amber); }
+.nav-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.nav-brand-text { display: flex; flex-direction: column; gap: 1px; }
+.nav-brand-name { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); line-height: 1; }
+.nav-brand-sub { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a {
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-links a.active { color: var(--amber); }
+
+/* LAYOUT */
+main {
+  max-width: 1100px; margin: 0 auto;
+  padding: calc(var(--nav-h) + 60px) 40px 100px;
+}
+
+/* PAGE HEADER */
+.page-header { margin-bottom: 60px; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+}
+.section-label::before { content: ''; display: block; width: 22px; height: 2px; background: var(--amber); }
+
+.page-header h1 {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 600;
+  letter-spacing: -.03em; color: var(--ink); line-height: 1.15; margin-bottom: 16px;
+}
+.page-header p { font-size: 15px; font-weight: 300; color: var(--ink-3); max-width: 560px; line-height: 1.75; }
+
+/* EXPERTISE GRID */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.expertise-card {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 28px 26px;
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 12px; text-decoration: none;
+  transition: border-color .22s, background .22s, transform .22s;
+  position: relative; overflow: hidden;
+}
+
+.expertise-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--amber);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+}
+
+.expertise-card:hover {
+  border-color: var(--line-2); background: var(--bg-4); transform: translateY(-3px);
+}
+.expertise-card:hover::after { transform: scaleX(1); }
+
+.expertise-card-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+}
+
+.expertise-member-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--amber);
+}
+
+.expertise-arrow {
+  color: var(--muted); font-size: 18px;
+  transition: transform .2s, color .2s; line-height: 1;
+}
+.expertise-card:hover .expertise-arrow { transform: translate(3px, -3px); color: var(--amber); }
+
+.expertise-card-title { font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -.015em; line-height: 1.3; }
+.expertise-card-channel { font-size: 13px; font-weight: 300; color: var(--ink-3); font-style: italic; }
+.expertise-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+/* FOOTER */
+footer { background: var(--bg-2); border-top: 1px solid var(--line); }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto; padding: 36px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.footer-brand { display: flex; flex-direction: column; gap: 4px; }
+.footer-title { font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: .06em; }
+.footer-meta { font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+.footer-members { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.footer-member-dot {
+  font-size: 11px; color: var(--muted); padding: 4px 10px;
+  border: 1px solid var(--line); border-radius: 20px; letter-spacing: .06em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  main { padding: calc(var(--nav-h) + 40px) 20px 60px; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-members { justify-content: flex-start; }
+  .nav-links { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-wrap">
+      <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Travel Group</span>
+      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="members.html">Members</a>
+    <a href="logo.html">Logo</a>
+    <a href="expertise.html" class="active">Expertise</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="section-label">Expertise Pages</div>
+    <h1>Individual Channel Analyses</h1>
+    <p>Each member has produced an in-depth visual rhetoric analysis of a single travel YouTube channel, applying a shared framework — mise-en-scene, editing, and narrative anchoring — to reveal how different creators construct authority and meaning.</p>
+  </div>
+
+  <div class="expertise-grid">
+
+    <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">임지우 · Julie Yim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Lost LeBlanc</div>
+      <div class="expertise-card-channel">YouTube · Luxury Travel Documentary</div>
+      <div class="expertise-card-desc">Cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</div>
+    </a>
+
+    <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">배주현 · Juhyun Bae</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Indigo Traveller</div>
+      <div class="expertise-card-channel">YouTube · Conflict-Zone Travel</div>
+      <div class="expertise-card-desc">Nick Fisher's risk rhetoric, humanitarian aesthetics, and the grammar of journalism in travel documentary.</div>
+    </a>
+
+    <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">김진완 · Jinwan Kim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Mark Wiens</div>
+      <div class="expertise-card-channel">YouTube · Food &amp; Travel</div>
+      <div class="expertise-card-desc">Close-up reaction shots, street-food mise-en-scene, and the semiotics of taste as cultural encounter.</div>
+    </a>
+
+    <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">김대환 · Dae Hwan Kim</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Finn Whitaker</div>
+      <div class="expertise-card-channel">YouTube · Slow Travel</div>
+      <div class="expertise-card-desc">Minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</div>
+    </a>
+
+    <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">배주이 · Juyi Bae</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Via Li</div>
+      <div class="expertise-card-channel">YouTube · Solo Female Travel</div>
+      <div class="expertise-card-desc">Safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</div>
+    </a>
+
+    <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">고태영 · Taeyoung Koh</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Drew Binsky</div>
+      <div class="expertise-card-channel">YouTube · Extreme Country Count</div>
+      <div class="expertise-card-desc">Rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</div>
+    </a>
+
+    <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="expertise-card">
+      <div class="expertise-card-header">
+        <span class="expertise-member-tag">최영빈 · Youngbin Choi</span>
+        <span class="expertise-arrow">↗</span>
+      </div>
+      <div class="expertise-card-title">Paddy Doyle</div>
+      <div class="expertise-card-channel">YouTube · Alternative Tourism</div>
+      <div class="expertise-card-desc">Immersive drone composition, invisible editing, and the media anchor persona in Southeast Asia travel documentary.</div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-title">Travel Group — EST 240</div>
+      <div class="footer-meta">SUNY Korea · Visual Rhetoric &amp; IT · Prof. Pennings · Spring 2026</div>
+    </div>
+    <div class="footer-members">
+      <span class="footer-member-dot">임지우</span>
+      <span class="footer-member-dot">배주현</span>
+      <span class="footer-member-dot">김진완</span>
+      <span class="footer-member-dot">김대환</span>
+      <span class="footer-member-dot">배주이</span>
+      <span class="footer-member-dot">고태영</span>
+      <span class="footer-member-dot">최영빈</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
