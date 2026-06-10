@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Expertise — Travel Group EST 240</title>
+<title>AI Video — Travel Group EST 240</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -25,16 +25,17 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body {
   background: var(--bg); color: var(--ink);
   font-family: 'DM Sans', sans-serif;
   font-size: 16px; line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 ::selection { background: var(--amber); color: var(--bg); }
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
@@ -69,78 +70,168 @@ body {
 .nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
 .nav-links a.active { color: var(--amber); }
 
-/* LAYOUT */
-main {
-  max-width: 1100px; margin: 0 auto;
-  padding: calc(var(--nav-h) + 60px) 40px 100px;
+/* EXPERTISE DROPDOWN */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-dropdown-toggle:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown-chevron { flex-shrink: 0; transition: transform .2s; }
+.nav-dropdown.open .nav-dropdown-toggle { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 250px; padding: 6px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+.nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown-menu a {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: .03em;
+  text-transform: none; color: var(--ink-2); text-decoration: none;
+  padding: 9px 12px; border-radius: 6px; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.nav-dropdown-menu a:hover { background: var(--amber-xs); color: var(--amber); }
+
+/* SCROLL DOTS */
+.scroll-dots {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 200;
+}
+.scroll-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--line-2); border: 1px solid var(--muted);
+  cursor: pointer; transition: background .2s, transform .2s;
+  display: block;
+}
+.scroll-dot.active { background: var(--amber); transform: scale(1.5); border-color: var(--amber); }
+.scroll-dot:hover { background: var(--ink-3); }
+
+/* VIDEO SLIDES */
+.video-wrapper {
+  padding-top: var(--nav-h);
 }
 
-/* PAGE HEADER */
-.page-header { margin-bottom: 60px; }
-.section-label {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 16px;
-}
-.section-label::before { content: ''; display: block; width: 22px; height: 2px; background: var(--amber); }
-
-.page-header h1 {
-  font-size: clamp(28px, 4vw, 44px); font-weight: 600;
-  letter-spacing: -.03em; color: var(--ink); line-height: 1.15; margin-bottom: 16px;
-}
-.page-header p { font-size: 15px; font-weight: 300; color: var(--ink-3); max-width: 560px; line-height: 1.75; }
-
-/* EXPERTISE GRID */
-.expertise-grid {
+.video-slide {
+  height: calc(100vh - var(--nav-h));
+  scroll-snap-align: start;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
 }
 
-.expertise-card {
-  display: flex; flex-direction: column; gap: 14px;
-  padding: 28px 26px;
-  background: var(--bg-3); border: 1px solid var(--line);
-  border-radius: 12px; text-decoration: none;
-  transition: border-color .22s, background .22s, transform .22s;
-  position: relative; overflow: hidden;
+/* Left — video panel */
+.video-slide-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  padding: 48px 40px;
+  position: relative;
 }
 
-.expertise-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 2px; background: var(--amber);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-3);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
 }
 
-.expertise-card:hover {
-  border-color: var(--line-2); background: var(--bg-4); transform: translateY(-3px);
-}
-.expertise-card:hover::after { transform: scaleX(1); }
-
-.expertise-card-header {
-  display: flex; align-items: flex-start;
-  justify-content: space-between; gap: 12px;
+.video-frame video {
+  display: block;
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  background: #000;
 }
 
-.expertise-member-tag {
-  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+.video-frame video::-webkit-media-controls-panel {
+  background: rgba(13,13,13,.7);
+}
+
+.slide-index-label {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px; font-weight: 500; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Right — info panel */
+.video-slide-info {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 60px 64px;
+  position: relative;
+}
+
+.video-slide-info::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 2px; background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+  opacity: .4;
+}
+
+.slide-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .24em;
   text-transform: uppercase; color: var(--amber);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.slide-eyebrow::before {
+  content: ''; display: block; width: 20px; height: 1.5px; background: var(--amber);
 }
 
-.expertise-arrow {
-  color: var(--muted); font-size: 18px;
-  transition: transform .2s, color .2s; line-height: 1;
+.slide-name {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; letter-spacing: -.04em;
+  color: var(--ink); line-height: 1.05;
+  margin-bottom: 6px;
 }
-.expertise-card:hover .expertise-arrow { transform: translate(3px, -3px); color: var(--amber); }
 
-.expertise-card-title { font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -.015em; line-height: 1.3; }
-.expertise-card-channel { font-size: 13px; font-weight: 300; color: var(--ink-3); font-style: italic; }
-.expertise-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+.slide-channel-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.slide-channel-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--bg);
+  background: var(--amber); padding: 5px 14px; border-radius: 20px;
+}
+
+.slide-channel-type {
+  font-size: 12px; font-weight: 300; color: var(--muted); font-style: italic;
+}
+
+.slide-divider {
+  width: 40px; height: 1px; background: var(--line-2); margin-bottom: 28px;
+}
+
+.slide-bio {
+  font-size: 15px; font-weight: 300; color: var(--ink-2);
+  line-height: 1.8; max-width: 420px;
+}
 
 /* FOOTER */
-footer { background: var(--bg-2); border-top: 1px solid var(--line); }
+footer {
+  scroll-snap-align: start;
+  background: var(--bg-2); border-top: 1px solid var(--line);
+}
 .footer-inner {
   max-width: 1100px; margin: 0 auto; padding: 36px 40px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -155,14 +246,28 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
 }
 
 /* RESPONSIVE */
-@media (max-width: 720px) {
-  main { padding: calc(var(--nav-h) + 40px) 20px 60px; }
-  .expertise-grid { grid-template-columns: 1fr; }
+@media (max-width: 800px) {
+  .video-slide {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - var(--nav-h));
+  }
+  .video-slide-media {
+    border-right: none; border-bottom: 1px solid var(--line);
+    padding: 36px 28px; min-height: 320px;
+  }
+  .video-frame { max-width: 320px; }
+  .video-frame video { max-height: 50vh; }
+  .video-slide-info { padding: 32px 28px; }
+  .video-slide-info::before { display: none; }
+  .nav-links { display: none; }
+  .scroll-dots { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .footer-members { justify-content: flex-start; }
-  .nav-links { display: none; }
 }
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
   * { transition-duration: .01ms !important; }
 }
 </style>
@@ -183,92 +288,203 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
     <a href="index.html">Home</a>
     <a href="members.html">Members</a>
     <a href="logo.html">Logo</a>
-    <a href="expertise.html" class="active">Expertise</a>
+    <div class="nav-dropdown" id="expertiseDropdown">
+      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+        Expertise
+        <svg class="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank">Julie Yim - Lost LeBlanc</a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank">Juhyun Bae - Indigo Traveller</a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank">Jinwan Kim - Mark Wiens</a>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank">Dae Hwan Kim - Finn Whitaker</a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank">Juyi Bae - Via Li</a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank">Taeyoung Koh - Drew Binsky</a>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank">Youngbin Choi - Paddy Doyle</a>
+      </div>
+    </div>
+    <a href="expertise.html" class="active">AI Video</a>
   </div>
 </nav>
 
-<main>
-  <div class="page-header">
-    <div class="section-label">Expertise Pages</div>
-    <h1>Individual Channel Analyses</h1>
-    <p>Each member has produced an in-depth visual rhetoric analysis of a single travel YouTube channel, applying a shared framework — mise-en-scene, editing, and narrative anchoring — to reveal how different creators construct authority and meaning.</p>
-  </div>
+<!-- SCROLL DOTS -->
+<nav class="scroll-dots" id="scrollDots" aria-label="AI Video navigation">
+  <a class="scroll-dot active" href="#v1" aria-label="Julie Yim"></a>
+  <a class="scroll-dot" href="#v2" aria-label="Juhyun Bae"></a>
+  <a class="scroll-dot" href="#v3" aria-label="Jinwan Kim"></a>
+  <a class="scroll-dot" href="#v4" aria-label="Dae Hwan Kim"></a>
+  <a class="scroll-dot" href="#v5" aria-label="Juyi Bae"></a>
+  <a class="scroll-dot" href="#v6" aria-label="Taeyoung Koh"></a>
+  <a class="scroll-dot" href="#v7" aria-label="Youngbin Choi"></a>
+</nav>
 
-  <div class="expertise-grid">
+<!-- VIDEO SLIDES -->
+<div class="video-wrapper">
 
-    <a href="https://240-julie-black-gold.netlify.app/" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">임지우 · Julie Yim</span>
-        <span class="expertise-arrow">↗</span>
+  <!-- 1 — Julie Yim -->
+  <section class="video-slide" id="v1">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Julie Yim Profile.jpeg">
+          <source src="Julie Yim Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Julie Yim Video.mp4">Download the video</a>.
+        </video>
       </div>
-      <div class="expertise-card-title">Lost LeBlanc</div>
-      <div class="expertise-card-channel">YouTube · Luxury Travel Documentary</div>
-      <div class="expertise-card-desc">Cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</div>
-    </a>
-
-    <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">배주현 · Juhyun Bae</span>
-        <span class="expertise-arrow">↗</span>
+      <span class="slide-index-label">01 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Julie Yim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Lost LeBlanc</span>
+        <span class="slide-channel-type">Luxury Travel Documentary</span>
       </div>
-      <div class="expertise-card-title">Indigo Traveller</div>
-      <div class="expertise-card-channel">YouTube · Conflict-Zone Travel</div>
-      <div class="expertise-card-desc">Nick Fisher's risk rhetoric, humanitarian aesthetics, and the grammar of journalism in travel documentary.</div>
-    </a>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short reimagining Lost LeBlanc's cinematic drone work and aspirational framing — luxury travel rendered as visual excess.</p>
+    </div>
+  </section>
 
-    <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">김진완 · Jinwan Kim</span>
-        <span class="expertise-arrow">↗</span>
+  <!-- 2 — Juhyun Bae -->
+  <section class="video-slide" id="v2">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Juhyun Bae Profile.jpeg">
+          <source src="Juhyun Bae Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Juhyun Bae Video.mp4">Download the video</a>.
+        </video>
       </div>
-      <div class="expertise-card-title">Mark Wiens</div>
-      <div class="expertise-card-channel">YouTube · Food &amp; Travel</div>
-      <div class="expertise-card-desc">Close-up reaction shots, street-food mise-en-scene, and the semiotics of taste as cultural encounter.</div>
-    </a>
-
-    <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">김대환 · Dae Hwan Kim</span>
-        <span class="expertise-arrow">↗</span>
+      <span class="slide-index-label">02 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Juhyun Bae</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Indigo Traveller</span>
+        <span class="slide-channel-type">Conflict-Zone Travel</span>
       </div>
-      <div class="expertise-card-title">Finn Whitaker</div>
-      <div class="expertise-card-channel">YouTube · Slow Travel</div>
-      <div class="expertise-card-desc">Minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</div>
-    </a>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short channeling Indigo Traveller's risk rhetoric and humanitarian aesthetics — the grammar of journalism applied to travel documentary.</p>
+    </div>
+  </section>
 
-    <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">배주이 · Juyi Bae</span>
-        <span class="expertise-arrow">↗</span>
+  <!-- 3 — Jinwan Kim -->
+  <section class="video-slide" id="v3">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Jinwan Kim Profile.jpeg">
+          <source src="Jinwan Kim Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Jinwan Kim Video.mp4">Download the video</a>.
+        </video>
       </div>
-      <div class="expertise-card-title">Via Li</div>
-      <div class="expertise-card-channel">YouTube · Solo Female Travel</div>
-      <div class="expertise-card-desc">Safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</div>
-    </a>
-
-    <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">고태영 · Taeyoung Koh</span>
-        <span class="expertise-arrow">↗</span>
+      <span class="slide-index-label">03 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Jinwan Kim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Mark Wiens</span>
+        <span class="slide-channel-type">Food &amp; Travel</span>
       </div>
-      <div class="expertise-card-title">Drew Binsky</div>
-      <div class="expertise-card-channel">YouTube · Extreme Country Count</div>
-      <div class="expertise-card-desc">Rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</div>
-    </a>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short capturing Mark Wiens' close-up reaction shots and street-food mise-en-scene — taste rendered as cultural encounter.</p>
+    </div>
+  </section>
 
-    <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank" class="expertise-card">
-      <div class="expertise-card-header">
-        <span class="expertise-member-tag">최영빈 · Youngbin Choi</span>
-        <span class="expertise-arrow">↗</span>
+  <!-- 4 — Dae Hwan Kim -->
+  <section class="video-slide" id="v4">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Dae Hwan Kim Profile.jpeg">
+          <source src="Dae Hwan Kim Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Dae Hwan Kim Video.mp4">Download the video</a>.
+        </video>
       </div>
-      <div class="expertise-card-title">Paddy Doyle</div>
-      <div class="expertise-card-channel">YouTube · Alternative Tourism</div>
-      <div class="expertise-card-desc">Immersive drone composition, invisible editing, and the media anchor persona in Southeast Asia travel documentary.</div>
-    </a>
+      <span class="slide-index-label">04 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Dae Hwan Kim</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Finn Whitaker</span>
+        <span class="slide-channel-type">Slow Travel</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short echoing Finn Whitaker's minimalist production and slow-travel philosophy — the rhetoric of anti-tourism in digital media.</p>
+    </div>
+  </section>
 
-  </div>
-</main>
+  <!-- 5 — Juyi Bae -->
+  <section class="video-slide" id="v5">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Juyi Bae Profile.png">
+          <source src="Juyi Bae Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Juyi Bae Video.mp4">Download the video</a>.
+        </video>
+      </div>
+      <span class="slide-index-label">05 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Juyi Bae</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Via Li</span>
+        <span class="slide-channel-type">Solo Female Travel</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short exploring Via Li's safety narratives and identity performance — the visual rhetoric of independence in international vlogging.</p>
+    </div>
+  </section>
 
+  <!-- 6 — Taeyoung Koh -->
+  <section class="video-slide" id="v6">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Taeyoung Koh Profile.jpeg">
+          <source src="Taeyoung Koh Video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="Taeyoung Koh Video.mp4">Download the video</a>.
+        </video>
+      </div>
+      <span class="slide-index-label">06 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Taeyoung Koh</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Drew Binsky</span>
+        <span class="slide-channel-type">Extreme Country Count</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short modeled on Drew Binsky's rapid-fire editing and challenge rhetoric — international travel as gamified spectacle.</p>
+    </div>
+  </section>
+
+  <!-- 7 — Youngbin Choi -->
+  <section class="video-slide" id="v7">
+    <div class="video-slide-media">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="Youngbin Choi Profile.png">
+          <source src="Youngbin Choi Video.mov" type="video/quicktime">
+          Your browser does not support embedded video. <a href="Youngbin Choi Video.mov">Download the video</a>.
+        </video>
+      </div>
+      <span class="slide-index-label">07 / 07</span>
+    </div>
+    <div class="video-slide-info">
+      <div class="slide-eyebrow">AI Video</div>
+      <div class="slide-name">Youngbin Choi</div>
+      <div class="slide-channel-row">
+        <span class="slide-channel-badge">Paddy Doyle</span>
+        <span class="slide-channel-type">Alternative Tourism</span>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-bio">An AI-generated short reconstructing Paddy Doyle's immersive drone composition and invisible editing — the media anchor persona in Southeast Asia travel documentary.</p>
+    </div>
+  </section>
+
+</div><!-- /video-wrapper -->
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -286,6 +502,54 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
     </div>
   </div>
 </footer>
+
+<script>
+  // Update active dot on scroll
+  const slides = document.querySelectorAll('.video-slide');
+  const dots   = document.querySelectorAll('.scroll-dot');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = [...slides].indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+
+  // Expertise dropdown toggle
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dd.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>
 
 </body>
 </html>

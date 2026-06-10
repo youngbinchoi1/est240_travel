@@ -102,6 +102,36 @@ body {
 .nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
 .nav-links a.active { color: var(--amber); }
 
+/* ─── EXPERTISE DROPDOWN ─── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-dropdown-toggle:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown-chevron { flex-shrink: 0; transition: transform .2s; }
+.nav-dropdown.open .nav-dropdown-toggle { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 250px; padding: 6px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+.nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown-menu a {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: .03em;
+  text-transform: none; color: var(--ink-2); text-decoration: none;
+  padding: 9px 12px; border-radius: 6px; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.nav-dropdown-menu a:hover { background: var(--amber-xs); color: var(--amber); }
+
 /* ─── LAYOUT ─── */
 main {
   max-width: 1100px;
@@ -260,7 +290,22 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
     <a href="index.html" class="active">Home</a>
     <a href="members.html">Members</a>
     <a href="logo.html">Logo</a>
-    <a href="expertise.html">Expertise</a>
+    <div class="nav-dropdown" id="expertiseDropdown">
+      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+        Expertise
+        <svg class="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank">Julie Yim - Lost LeBlanc</a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank">Juhyun Bae - Indigo Traveller</a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank">Jinwan Kim - Mark Wiens</a>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank">Dae Hwan Kim - Finn Whitaker</a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank">Juyi Bae - Via Li</a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank">Taeyoung Koh - Drew Binsky</a>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank">Youngbin Choi - Paddy Doyle</a>
+      </div>
+    </div>
+    <a href="expertise.html">AI Video</a>
   </div>
 </nav>
 
@@ -315,6 +360,39 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
     </div>
   </div>
 </footer>
+
+<script>
+  // Expertise dropdown toggle
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dd.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>
 
 </body>
 </html>

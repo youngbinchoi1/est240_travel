@@ -69,6 +69,36 @@ body {
 .nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
 .nav-links a.active { color: var(--amber); }
 
+/* ─── EXPERTISE DROPDOWN ─── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-dropdown-toggle:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown-chevron { flex-shrink: 0; transition: transform .2s; }
+.nav-dropdown.open .nav-dropdown-toggle { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 250px; padding: 6px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+.nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown-menu a {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: .03em;
+  text-transform: none; color: var(--ink-2); text-decoration: none;
+  padding: 9px 12px; border-radius: 6px; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.nav-dropdown-menu a:hover { background: var(--amber-xs); color: var(--amber); }
+
 /* ─── SCROLL DOTS ─── */
 .scroll-dots {
   position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
@@ -126,21 +156,19 @@ body {
   background: var(--bg-3);
   border: 1px solid var(--line-2);
   border-radius: 16px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 24px 60px rgba(0,0,0,.5);
 }
 
-/* Monogram inside the card */
-.slide-monogram {
-  font-size: clamp(64px, 10vw, 110px);
-  font-weight: 700;
-  letter-spacing: -.05em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(237,208,122,.3);
-  line-height: 1;
-  user-select: none;
+/* Member photo inside the card */
+.slide-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .slide-index-label {
@@ -150,18 +178,6 @@ body {
   text-transform: uppercase; color: var(--muted);
   white-space: nowrap;
 }
-
-/* Personal logo badge */
-.slide-personal-logo {
-  position: absolute; top: -14px; right: -14px;
-  width: 44px; height: 44px;
-  background: var(--bg-2); backdrop-filter: blur(8px);
-  border-radius: 10px; border: 1px solid var(--line-2);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,.4);
-}
-.slide-personal-logo img { width: 28px; height: 28px; object-fit: contain; }
-.slide-personal-logo svg { width: 28px; height: 28px; }
 
 /* Right — info panel */
 .slide-info {
@@ -206,10 +222,7 @@ body {
   font-size: 11px; font-weight: 600; letter-spacing: .14em;
   text-transform: uppercase; color: var(--bg);
   background: var(--amber); padding: 5px 14px; border-radius: 20px;
-}
-
-.slide-channel-type {
-  font-size: 12px; font-weight: 300; color: var(--muted); font-style: italic;
+  white-space: normal; line-height: 1.6; text-align: center;
 }
 
 .slide-divider {
@@ -304,7 +317,22 @@ footer {
     <a href="index.html">Home</a>
     <a href="members.html" class="active">Members</a>
     <a href="logo.html">Logo</a>
-    <a href="expertise.html">Expertise</a>
+    <div class="nav-dropdown" id="expertiseDropdown">
+      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+        Expertise
+        <svg class="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank">Julie Yim - Lost LeBlanc</a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank">Juhyun Bae - Indigo Traveller</a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank">Jinwan Kim - Mark Wiens</a>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank">Dae Hwan Kim - Finn Whitaker</a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank">Juyi Bae - Via Li</a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank">Taeyoung Koh - Drew Binsky</a>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank">Youngbin Choi - Paddy Doyle</a>
+      </div>
+    </div>
+    <a href="expertise.html">AI Video</a>
   </div>
 </nav>
 
@@ -328,7 +356,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">JY</div>
+          <img class="slide-photo" src="Julie Yim Profile.jpeg" alt="Julie Yim">
         </div>
       </div>
       <span class="slide-index-label">01 / 07</span>
@@ -337,8 +365,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Julie Yim</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Lost LeBlanc</span>
-        <span class="slide-channel-type">Luxury Travel Documentary</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Lost LeBlanc's luxury travel documentary style — cinematic drone work, aspirational framing, and the construction of wanderlust through visual excess.</p>
@@ -358,12 +385,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">JB</div>
-          <div class="slide-personal-logo">
-            <svg viewBox="0 0 120 104" xmlns="http://www.w3.org/2000/svg">
-              <text x="62" y="84" font-family="Georgia,serif" font-size="86" font-weight="600" fill="#edd07a" text-anchor="middle" style="letter-spacing:-4px;">JB</text>
-            </svg>
-          </div>
+          <img class="slide-photo" src="Juhyun Bae Profile.jpeg" alt="Juhyun Bae">
         </div>
       </div>
       <span class="slide-index-label">02 / 07</span>
@@ -372,8 +394,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Juhyun Bae</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Indigo Traveller</span>
-        <span class="slide-channel-type">Conflict-Zone Travel</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Nick Fisher's Indigo Traveller channel — conflict-zone journalism aesthetics, risk rhetoric, and the grammar of humanitarian travel documentary.</p>
@@ -393,7 +414,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">JK</div>
+          <img class="slide-photo" src="Jinwan Kim Profile.jpeg" alt="Jinwan Kim">
         </div>
       </div>
       <span class="slide-index-label">03 / 07</span>
@@ -402,8 +423,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Jinwan Kim</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Mark Wiens</span>
-        <span class="slide-channel-type">Food &amp; Travel</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Mark Wiens' food-travel hybrid channel — close-up reaction shots, street-food mise-en-scene, and the semiotics of taste as cultural encounter.</p>
@@ -423,7 +443,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">DK</div>
+          <img class="slide-photo" src="Dae Hwan Kim Profile.jpeg" alt="Dae Hwan Kim">
         </div>
       </div>
       <span class="slide-index-label">04 / 07</span>
@@ -432,8 +452,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Dae Hwan Kim</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Finn Whitaker</span>
-        <span class="slide-channel-type">Slow Travel</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Finn Whitaker's off-the-beaten-path channel — minimalist production, slow travel philosophy, and the rhetoric of anti-tourism in digital media.</p>
@@ -453,7 +472,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">JB</div>
+          <img class="slide-photo" src="Juyi Bae Profile.png" alt="Juyi Bae">
         </div>
       </div>
       <span class="slide-index-label">05 / 07</span>
@@ -462,8 +481,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Juyi Bae</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Via Li</span>
-        <span class="slide-channel-type">Solo Female Travel</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Via Li's solo female travel channel — safety narratives, identity performance, and the visual rhetoric of independence in international vlogging.</p>
@@ -483,7 +501,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">TK</div>
+          <img class="slide-photo" src="Taeyoung Koh Profile.jpeg" alt="Taeyoung Koh">
         </div>
       </div>
       <span class="slide-index-label">06 / 07</span>
@@ -492,8 +510,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Taeyoung Koh</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Drew Binsky</span>
-        <span class="slide-channel-type">Extreme Country Count</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Drew Binsky's world-record country-count channel — rapid-fire editing, challenge rhetoric, and the gamification of international travel as spectacle.</p>
@@ -513,10 +530,7 @@ footer {
       <div class="slide-image-bg"></div>
       <div class="slide-avatar-wrap">
         <div class="slide-avatar-inner">
-          <div class="slide-monogram">YC</div>
-          <div class="slide-personal-logo">
-            <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/Y_logo.png" alt="Youngbin Choi logo">
-          </div>
+          <img class="slide-photo" src="Youngbin Choi Profile.png" alt="Youngbin Choi">
         </div>
       </div>
       <span class="slide-index-label">07 / 07</span>
@@ -525,8 +539,7 @@ footer {
       <div class="slide-eyebrow">Group Member</div>
       <div class="slide-name">Youngbin Choi</div>
       <div class="slide-channel-row">
-        <span class="slide-channel-badge">Paddy Doyle</span>
-        <span class="slide-channel-type">Alternative Tourism</span>
+        <span class="slide-channel-badge">Technological System Management Major</span>
       </div>
       <div class="slide-divider"></div>
       <p class="slide-bio">Analyzes Paddy Doyle's Southeast Asia alternative-tourism channel — immersive drone composition, invisible editing, and the media anchor persona.</p>
@@ -576,6 +589,37 @@ footer {
   }, { threshold: 0.5 });
 
   slides.forEach(s => observer.observe(s));
+
+  // Expertise dropdown toggle
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dd.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 </script>
 
 </body>
