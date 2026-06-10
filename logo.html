@@ -1,362 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Logo — Travel Group EST 240</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --bg:        #0d0d0d;
-  --bg-2:      #141414;
-  --bg-3:      #1a1a1a;
-  --bg-4:      #202020;
-  --ink:       #f0ece4;
-  --ink-2:     #c4bdb0;
-  --ink-3:     #8a8278;
-  --muted:     #5c5650;
-  --line:      #262220;
-  --line-2:    #302c28;
-  --amber:     #edd07a;
-  --amber-dk:  #c9a94e;
-  --amber-lt:  #251f0c;
-  --amber-xs:  #1a1608;
-  --nav-h:     64px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Group logo identity design for Travel Group, EST 240 Visual Rhetoric.">
+  <title>Logo — Travel Group EST 240</title>
+  <style>
+    :root {
+      --ink: #0a0a0c;
+      --ink-2: #14141a;
+      --line: #2a2a35;
+      --paper: #ece7df;
+      --muted: #b8bcc7;
+      --amber: #edd07a;
+      --amber-2: #c99a3a;
+      --font-display: Georgia, 'Times New Roman', serif;
+      --font-body: Georgia, 'Times New Roman', serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --maxw: 900px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg); color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px; line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
-}
+    /* NAV */
+    .nav { border-bottom: 1px solid var(--line); background: rgba(10,10,12,0.92); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 10; }
+    .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--paper); }
+    .nav-brand img { width: 34px; height: 34px; object-fit: contain; }
+    .nav-brand-text { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 3px; border-bottom: 1px solid transparent; transition: .2s; }
+    .nav-links a:hover { color: var(--paper); }
+    .nav-links a.active { color: var(--paper); border-color: var(--amber); }
 
-::selection { background: var(--amber); color: var(--bg); }
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+    /* expertise dropdown */
+    .dropdown { position: relative; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--ink-2); border: 1px solid var(--line); padding: 8px 0; min-width: 240px; margin-top: 8px; z-index: 20; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 8px 18px; font-size: 11px; letter-spacing: 1px; color: var(--muted); border: none; }
+    .dropdown-menu a:hover { color: var(--amber); background: rgba(237,208,122,0.06); }
 
-/* NAV */
-.top-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: var(--nav-h); background: rgba(13,13,13,.92);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 32px; z-index: 300;
-}
-.nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-.nav-logo-wrap {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1.5px solid var(--line-2);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; background: var(--bg-3); flex-shrink: 0; transition: border-color .2s;
-}
-.nav-brand:hover .nav-logo-wrap { border-color: var(--amber); }
-.nav-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
-.nav-brand-text { display: flex; flex-direction: column; gap: 1px; }
-.nav-brand-name { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); line-height: 1; }
-.nav-brand-sub { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
-.nav-links { display: flex; align-items: center; gap: 4px; }
-.nav-links a {
-  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none; padding: 7px 14px; border-radius: 6px;
-  transition: color .18s, background .18s;
-}
-.nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
-.nav-links a.active { color: var(--amber); }
+    /* HERO */
+    .hero { padding: 90px 0 60px; }
+    .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; }
+    h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(38px, 6vw, 62px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+    h1 em { font-style: italic; color: var(--amber); }
+    .lede { font-size: 20px; color: var(--muted); max-width: 60ch; line-height: 1.55; }
 
-/* EXPERTISE DROPDOWN */
-.nav-dropdown { position: relative; }
-.nav-dropdown-toggle {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); background: none; border: none; cursor: pointer;
-  font-family: inherit; padding: 7px 14px; border-radius: 6px;
-  transition: color .18s, background .18s;
-}
-.nav-dropdown-toggle:hover { color: var(--amber); background: var(--amber-xs); }
-.nav-dropdown-chevron { flex-shrink: 0; transition: transform .2s; }
-.nav-dropdown.open .nav-dropdown-toggle { color: var(--amber); background: var(--amber-xs); }
-.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
-.nav-dropdown-menu {
-  position: absolute; top: calc(100% + 8px); right: 0;
-  min-width: 250px; padding: 6px;
-  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px;
-  box-shadow: 0 16px 40px rgba(0,0,0,.45);
-  opacity: 0; visibility: hidden; transform: translateY(-6px);
-  transition: opacity .18s, transform .18s, visibility .18s;
-}
-.nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-.nav-dropdown-menu a {
-  display: block; font-size: 12px; font-weight: 500; letter-spacing: .03em;
-  text-transform: none; color: var(--ink-2); text-decoration: none;
-  padding: 9px 12px; border-radius: 6px; white-space: nowrap;
-  transition: background .15s, color .15s;
-}
-.nav-dropdown-menu a:hover { background: var(--amber-xs); color: var(--amber); }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(22px, 3vw, 28px); margin: 48px 0 14px; line-height: 1.2; }
 
-/* LAYOUT */
-main {
-  max-width: 1100px; margin: 0 auto;
-  padding: calc(var(--nav-h) + 60px) 40px 100px;
-}
+    /* hero logo */
+    .hero-mark { display: flex; justify-content: center; margin: 30px 0 50px; }
+    .hero-mark img { width: 100%; max-width: 380px; height: auto; }
 
-/* PAGE HEADER */
-.page-header { margin-bottom: 60px; }
-.section-label {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 16px;
-}
-.section-label::before { content: ''; display: block; width: 22px; height: 2px; background: var(--amber); }
+    /* 3-size grid */
+    .scale-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 24px 0 36px; }
+    .scale-cell { background: var(--ink-2); padding: 30px 16px 22px; text-align: center; }
+    .scale-art { height: 160px; display: flex; align-items: center; justify-content: center; }
+    .scale-art img { max-height: 150px; max-width: 100%; object-fit: contain; }
+    .scale-art.bw-stage { background: #ffffff; border-radius: 6px; padding: 10px; }
+    .scale-cell .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--muted); margin-top: 14px; }
+    .scale-cell .sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-.page-header h1 {
-  font-size: clamp(28px, 4vw, 44px); font-weight: 600;
-  letter-spacing: -.03em; color: var(--ink); line-height: 1.15; margin-bottom: 16px;
-}
-.page-header p { font-size: 15px; font-weight: 300; color: var(--ink-3); max-width: 560px; line-height: 1.75; }
+    /* section card list */
+    .section-num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; color: var(--amber); margin-top: 36px; }
+    p { margin-bottom: 18px; color: var(--paper); }
+    strong { color: #fff; }
+    em { color: var(--paper); }
 
-/* LOGO LAYOUT */
-.logo-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
+    blockquote { border-left: 2px solid var(--amber); padding: 6px 0 6px 22px; margin: 30px 0; font-family: var(--font-display); font-style: italic; font-size: 22px; line-height: 1.45; }
+    blockquote cite { display: block; font-family: var(--font-mono); font-style: normal; font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-top: 10px; }
 
-.logo-display { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    /* footer */
+    .foot { border-top: 1px solid var(--line); margin-top: 90px; padding: 36px 0 50px; }
+    .foot-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+    .foot-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+    .foot-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-bottom: 18px; }
+    .foot-members { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); }
 
-.logo-canvas {
-  width: 100%; aspect-ratio: 1; max-width: 360px;
-  background: var(--bg-3); border: 1px solid var(--line);
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-}
-.logo-canvas img { width: 75%; height: 75%; object-fit: contain; }
-
-.logo-canvas::after {
-  content: ''; position: absolute; inset: 16px;
-  border-radius: 12px; border: 1px solid rgba(237,208,122,.1);
-  animation: logo-pulse 3.5s ease-in-out infinite;
-}
-@keyframes logo-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.04); }
-}
-
-.logo-scales { display: flex; align-items: flex-end; gap: 16px; }
-.logo-scale-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.logo-scale-item img { object-fit: contain; }
-.logo-scale-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-
-/* DESIGN NOTES */
-.logo-design-notes { display: flex; flex-direction: column; gap: 0; }
-
-.logo-note { padding: 22px 0; border-bottom: 1px solid var(--line); }
-.logo-note:last-child { border-bottom: none; }
-
-.logo-note-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-
-.logo-note-num {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--amber-lt); border: 1px solid rgba(237,208,122,.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: var(--amber); flex-shrink: 0;
-}
-
-.logo-note-title { font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
-.logo-note-body { font-size: 14px; font-weight: 300; color: var(--ink-3); line-height: 1.75; padding-left: 38px; }
-
-/* FOOTER */
-footer { background: var(--bg-2); border-top: 1px solid var(--line); }
-.footer-inner {
-  max-width: 1100px; margin: 0 auto; padding: 36px 40px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-}
-.footer-brand { display: flex; flex-direction: column; gap: 4px; }
-.footer-title { font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: .06em; }
-.footer-meta { font-size: 11px; color: var(--muted); letter-spacing: .08em; }
-.footer-members { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-.footer-member-dot {
-  font-size: 11px; color: var(--muted); padding: 4px 10px;
-  border: 1px solid var(--line); border-radius: 20px; letter-spacing: .06em;
-}
-
-/* RESPONSIVE */
-@media (max-width: 720px) {
-  main { padding: calc(var(--nav-h) + 40px) 20px 60px; }
-  .logo-layout { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
-  .footer-members { justify-content: flex-start; }
-  .nav-links { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .logo-canvas::after { animation: none; }
-  * { transition-duration: .01ms !important; }
-}
-</style>
+    @media (max-width: 620px) {
+      .scale-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 14px; font-size: 10px; }
+      .hero { padding: 60px 0 40px; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="top-nav">
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo-wrap">
-      <img src="group_logo.png" alt="Travel Group Logo">
-    </div>
-    <div class="nav-brand-text">
-      <span class="nav-brand-name">Travel Group</span>
-      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="members.html">Members</a>
-    <a href="logo.html" class="active">Logo</a>
-    <div class="nav-dropdown" id="expertiseDropdown">
-      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-        Expertise
-        <svg class="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="nav-dropdown-menu">
-        <a href="https://240-julie-black-gold.netlify.app/" target="_blank">Julie Yim - Lost LeBlanc</a>
-        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank">Juhyun Bae - Indigo Traveller</a>
-        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank">Jinwan Kim - Mark Wiens</a>
-        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank">Dae Hwan Kim - Finn Whitaker</a>
-        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank">Juyi Bae - Via Li</a>
-        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank">Taeyoung Koh - Drew Binsky</a>
-        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank">Youngbin Choi - Paddy Doyle</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="logo-small.png" alt="Travel Group">
+        <span class="nav-brand-text">Travel Group · EST 240</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="members.html">Members</a>
+        <a href="logo.html" class="active">Logo</a>
+        <div class="dropdown">
+          <a href="#">Expertise &#9662;</a>
+          <div class="dropdown-menu">
+            <a href="https://240-julie-black-gold.netlify.app/">Julie Yim · Lost LeBlanc</a>
+            <a href="https://3rdlover0813-gif.github.io/index.html">Juhyun Bae · Indigo Traveller</a>
+            <a href="https://sites.google.com/view/markwienschannelanalysis">Jinwan Kim · Mark Wiens</a>
+            <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home">Dae Hwan Kim · Finn Whitaker</a>
+            <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit">Juyi Bae · Via Li</a>
+            <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh">Taeyoung Koh · Drew Binsky</a>
+            <a href="https://youngbinchoi1.github.io/est240/index.html">Youngbin Choi · Paddy Doyle</a>
+          </div>
+        </div>
+        <a href="expertise.html">AI Video</a>
       </div>
     </div>
-    <a href="expertise.html">AI Video</a>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Group Logo · Module 8</div>
+      <h1>Identity by<br><em>flight</em>.</h1>
+      <p class="lede">A breakdown of the visual choices behind the Travel Group mark.
+      An airplane in flight inside a complete circle, a brushed gold finish on a black field,
+      and a wordmark anchored beneath. Read denotatively as travel, connotatively as
+      passage, light, and the analogue romance of the journey.</p>
+    </header>
+
+    <div class="hero-mark">
+      <img src="logo-large.png" alt="Travel Group full mark">
+    </div>
+
+    <h2>Three sizes</h2>
+    <p>Per the Module 8 brief: three sizes, with the middle size in black and white. All three
+    descend from the same drawing so the mark stays recognisable from header to favicon.</p>
+
+    <div class="scale-grid">
+      <div class="scale-cell">
+        <div class="scale-art"><img src="logo-large.png" alt="Large color logo"></div>
+        <div class="lab">LARGE &middot; COLOR</div>
+        <div class="sub">Metallic gold, full mark</div>
+      </div>
+      <div class="scale-cell">
+        <div class="scale-art bw-stage"><img src="logo-medium-bw.png" alt="Medium B/W logo"></div>
+        <div class="lab">MEDIUM &middot; B/W</div>
+        <div class="sub">Print &amp; monochrome</div>
+      </div>
+      <div class="scale-cell">
+        <div class="scale-art"><img src="logo-small.png" alt="Small icon logo"></div>
+        <div class="lab">SMALL &middot; ICON</div>
+        <div class="sub">Favicon &amp; nav badge</div>
+      </div>
+    </div>
+
+    <div class="section-num">01 &middot; DENOTATION</div>
+    <h2>Airplane &amp; Circle</h2>
+    <p>The primary mark combines a rising airplane silhouette with a complete encircling
+    ring, broken at the base by two layered motion lines. At the denotative level this reads
+    immediately and without ambiguity as <strong>travel</strong>: an aircraft mid-flight, the
+    globe-line it crosses, the trail of its passage, and a wordmark that names the subject
+    outright. The composition is symmetrical, the airplane is centred, and the wordmark sits
+    on the lower axis so the eye returns to it after tracing the flight path.</p>
+
+    <div class="section-num">02 &middot; CONNOTATION</div>
+    <h2>Gold on Black</h2>
+    <p>The gold-on-black palette connotes warmth, distance, and the quality of golden-hour
+    light that defines travel photography. Against a near-black field the gold reads as
+    <em>luminous and isolated</em>, a single point of light on a dark map. It draws on the
+    visual grammar of premium hospitality, vintage cartography, and analogue film aesthetics,
+    framing the journey as something curated rather than merely documented.</p>
+
+    <blockquote>
+      An anchor does not float free of meaning; the design fixes it.
+      <cite>&mdash; after Stuart Hall</cite>
+    </blockquote>
+
+    <div class="section-num">03 &middot; SCALABILITY</div>
+    <h2>Three-Tier Reduction</h2>
+    <p>The mark is built to survive scale. The full metallic finish carries the large size where
+    detail and gradient can breathe. A flat black-on-white print version preserves the same
+    silhouette without colour, which is the test the brief requires. A flat single-tone gold
+    variant takes over at favicon and nav-badge size, where gradients and thin strokes would
+    otherwise collapse into mud. Each version is the same drawing, just calibrated to its job.</p>
+
+    <div class="section-num">04 &middot; SHARED IDENTITY</div>
+    <h2>One family, seven marks</h2>
+    <p>The group logo is designed to function as a family with each member's personal mark.
+    A shared amber accent and dark background establish visual continuity across the team's
+    individual sites, while the distinct forms &mdash; an airplane for the group, individual
+    typographic and heraldic marks for members &mdash; encode the collective-versus-individual
+    dynamic at the heart of the project. The group's mark says <em>where</em> we are looking;
+    each member's mark says <em>who</em> is looking.</p>
+
+    <h2>The AI prompts</h2>
+    <p>Per the Module 8 requirement to show the prompts and the AI used. The mark was
+    developed through the prompt set below, then refined until the airplane was centred and
+    the wordmark held its baseline at every size.</p>
+
+    <p><strong>Tool:</strong> image generator (Midjourney / DALL&middot;E class).</p>
+
+    <p><strong>Prompt 1 &middot; Full mark.</strong> A circular travel emblem on a deep black
+    background. A gold airplane silhouette ascends diagonally from lower-left to upper-right
+    and breaks through the top of an outlined gold circle. Below the airplane, two layered
+    motion swooshes curve like vapor trails. The word "travel" is centred across the lower
+    half in a bold italic serif, in the same gold. Flat vector logo style, metallic gold finish on
+    pure black, perfectly symmetrical composition.</p>
+
+    <p><strong>Prompt 2 &middot; Monochrome variant.</strong> The same emblem rendered for
+    print: a pure black silhouette on white. Circle, ascending airplane breaking the top,
+    layered motion swooshes, and the italic serif wordmark "travel" centred below. All in a
+    single flat tone, no gradient, no shadow, scalable.</p>
+
+    <p><strong>Prompt 3 &middot; Icon variant.</strong> Favicon-scale version. The same full
+    mark, flat gold on black, no gradient, generous padding on all sides so the airplane is not
+    clipped when reduced. Symmetrical.</p>
   </div>
-</nav>
 
-<main>
-  <div class="page-header">
-    <div class="section-label">Group Logo</div>
-    <h1>Identity Design</h1>
-    <p>A breakdown of the visual choices behind the Travel Group mark — its denotative form, connotative palette, and role within the larger family of individual member identities.</p>
-  </div>
-
-  <div class="logo-layout">
-
-    <!-- Logo display -->
-    <div class="logo-display">
-      <div class="logo-canvas">
-        <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Travel Group Logo">
-      </div>
-
-      <div class="logo-scales">
-        <div class="logo-scale-item">
-          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo large" width="64" height="64" style="object-fit:contain;">
-          <span class="logo-scale-label">Large</span>
-        </div>
-        <div class="logo-scale-item">
-          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo medium" width="40" height="40" style="object-fit:contain;">
-          <span class="logo-scale-label">Medium</span>
-        </div>
-        <div class="logo-scale-item">
-          <img src="https://raw.githubusercontent.com/youngbinchoi1/est240/main/travel_logo.png" alt="Logo small" width="24" height="24" style="object-fit:contain;">
-          <span class="logo-scale-label">Small</span>
-        </div>
-      </div>
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-title">Travel Group &mdash; EST 240</div>
+      <div class="foot-sub">SUNY Korea &middot; Prof. Pennings &middot; Spring 2026</div>
+      <div class="foot-members">Julie Yim &middot; Juhyun Bae &middot; Jinwan Kim &middot; Dae Hwan Kim &middot; Juyi Bae &middot; Taeyoung Koh &middot; Youngbin Choi</div>
     </div>
-
-    <!-- Design notes -->
-    <div class="logo-design-notes">
-
-      <div class="logo-note">
-        <div class="logo-note-head">
-          <span class="logo-note-num">1</span>
-          <span class="logo-note-title">Globe + Pin — Denotation</span>
-        </div>
-        <p class="logo-note-body">The primary mark combines a wireframe globe with a map pin. At the denotative level, this communicates the group's subject matter directly: international travel, geography, and place. The wireframe globe references cartographic tradition and signals that the group's analytical framework is global in scope.</p>
-      </div>
-
-      <div class="logo-note">
-        <div class="logo-note-head">
-          <span class="logo-note-num">2</span>
-          <span class="logo-note-title">Amber on Black — Connotation</span>
-        </div>
-        <p class="logo-note-body">The amber-on-black palette connotes warmth, distance, and the quality of golden-hour light that defines travel photography. Against a near-black field, the amber reads as luminous and isolated — a single point of light on a dark map, evoking both adventure and the analogue aesthetics of vintage cartography.</p>
-      </div>
-
-      <div class="logo-note">
-        <div class="logo-note-head">
-          <span class="logo-note-num">3</span>
-          <span class="logo-note-title">Wireframe Reduction — Scalability</span>
-        </div>
-        <p class="logo-note-body">The globe is rendered as a minimal wireframe rather than a filled form. This choice ensures legibility at favicon scale, where complex illustrations collapse. The reduction to meridian lines and a single pin creates a mark that works across favicon, nav badge, and full-bleed header without loss of meaning.</p>
-      </div>
-
-      <div class="logo-note">
-        <div class="logo-note-head">
-          <span class="logo-note-num">4</span>
-          <span class="logo-note-title">Shared Identity with Personal Marks</span>
-        </div>
-        <p class="logo-note-body">The group logo is designed to function as a family with each member's personal mark. The shared amber accent and dark background establish visual continuity across pages, while the distinct forms — globe for the group, individual typographic marks for members — encode the collective-vs.-individual dynamic at the heart of the group project.</p>
-      </div>
-
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-title">Travel Group — EST 240</div>
-      <div class="footer-meta">SUNY Korea · Prof. Pennings · Spring 2026</div>
-    </div>
-    <div class="footer-members">
-      <span class="footer-member-dot">Julie Yim</span>
-      <span class="footer-member-dot">Juhyun Bae</span>
-      <span class="footer-member-dot">Jinwan Kim</span>
-      <span class="footer-member-dot">Dae Hwan Kim</span>
-      <span class="footer-member-dot">Juyi Bae</span>
-      <span class="footer-member-dot">Taeyoung Koh</span>
-      <span class="footer-member-dot">Youngbin Choi</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Expertise dropdown toggle
-  document.querySelectorAll('.nav-dropdown').forEach(dd => {
-    const toggle = dd.querySelector('.nav-dropdown-toggle');
-    toggle.addEventListener('click', e => {
-      e.stopPropagation();
-      const isOpen = dd.classList.contains('open');
-      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
-        o.classList.remove('open');
-        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        dd.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.nav-dropdown.open').forEach(o => {
-      o.classList.remove('open');
-      o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
-        o.classList.remove('open');
-        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
-      });
-    }
-  });
-</script>
+  </footer>
 
 </body>
 </html>
