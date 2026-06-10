@@ -139,7 +139,7 @@ body {
   position: relative;
 }
 
-.video-frame {
+.video-block {
   position: relative;
   width: 100%;
   max-width: 520px;
@@ -150,15 +150,13 @@ body {
   box-shadow: 0 24px 60px rgba(0,0,0,.5);
 }
 
-.video-frame video {
-  display: block;
-  width: 100%;
+.video-block video {
   max-height: 72vh;
   object-fit: contain;
   background: #000;
 }
 
-.video-frame video::-webkit-media-controls-panel {
+.video-block video::-webkit-media-controls-panel {
   background: rgba(13,13,13,.7);
 }
 
@@ -265,8 +263,8 @@ footer {
     border-right: none; border-bottom: 1px solid var(--line);
     padding: 36px 28px; min-height: 320px;
   }
-  .video-frame { max-width: 320px; }
-  .video-frame video { max-height: 50vh; }
+  .video-block { max-width: 320px; }
+  .video-block video { max-height: 50vh; }
   .video-slide-info { padding: 32px 28px; }
   .video-slide-info::before { display: none; }
   .nav-links { display: none; }
@@ -334,11 +332,8 @@ footer {
   <!-- 1 — Julie Yim -->
   <section class="video-slide" id="v1">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Julie Yim Profile.jpeg">
-          <source src="Julie Yim Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Julie Yim Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Julie%20Yim%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">01 / 07</span>
     </div>
@@ -357,11 +352,8 @@ footer {
   <!-- 2 — Juhyun Bae -->
   <section class="video-slide" id="v2">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Juhyun Bae Profile.jpeg">
-          <source src="Juhyun Bae Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Juhyun Bae Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Juhyun%20Bae%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">02 / 07</span>
     </div>
@@ -380,11 +372,8 @@ footer {
   <!-- 3 — Jinwan Kim -->
   <section class="video-slide" id="v3">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Jinwan Kim Profile.jpeg">
-          <source src="Jinwan Kim Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Jinwan Kim Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Jinwan%20Kim%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">03 / 07</span>
     </div>
@@ -403,11 +392,8 @@ footer {
   <!-- 4 — Dae Hwan Kim -->
   <section class="video-slide" id="v4">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Dae Hwan Kim Profile.jpeg">
-          <source src="Dae Hwan Kim Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Dae Hwan Kim Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Dae%20Hwan%20Kim%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">04 / 07</span>
     </div>
@@ -426,11 +412,8 @@ footer {
   <!-- 5 — Juyi Bae -->
   <section class="video-slide" id="v5">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Juyi Bae Profile.png">
-          <source src="Juyi Bae Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Juyi Bae Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Juyi%20Bae%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">05 / 07</span>
     </div>
@@ -449,11 +432,8 @@ footer {
   <!-- 6 — Taeyoung Koh -->
   <section class="video-slide" id="v6">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Taeyoung Koh Profile.jpeg">
-          <source src="Taeyoung Koh Video.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="Taeyoung Koh Video.mp4">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Taeyoung%20Koh%20Video.mp4" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">06 / 07</span>
     </div>
@@ -472,11 +452,8 @@ footer {
   <!-- 7 — Youngbin Choi -->
   <section class="video-slide" id="v7">
     <div class="video-slide-media">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="Youngbin Choi Profile.png">
-          <source src="Youngbin Choi Video.mov" type="video/quicktime">
-          Your browser does not support embedded video. <a href="Youngbin Choi Video.mov">Download the video</a>.
-        </video>
+      <div class="video-block">
+        <video src="Youngbin%20Choi%20Video.mov" controls style="width:100%;display:block;"></video>
       </div>
       <span class="slide-index-label">07 / 07</span>
     </div>
