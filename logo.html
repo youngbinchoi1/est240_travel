@@ -86,6 +86,11 @@
     .foot-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-bottom: 18px; }
     .foot-members { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); }
 
+    /* download buttons */
+    .dl-row { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+    .dl-btn { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--amber); background: transparent; border: 1px solid #6e5524; padding: 6px 14px; border-radius: 4px; text-decoration: none; transition: .2s; display: inline-block; }
+    .dl-btn:hover { border-color: var(--amber); background: rgba(237,208,122,0.08); }
+
     @media (max-width: 620px) {
       .scale-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 14px; font-size: 10px; }
@@ -145,16 +150,28 @@
         <div class="scale-art"><img src="logo-large.png" alt="Large color logo"></div>
         <div class="lab">LARGE &middot; COLOR</div>
         <div class="sub">Metallic gold, full mark</div>
+        <div class="dl-row">
+          <a class="dl-btn" href="logo-large.svg" download>SVG</a>
+          <a class="dl-btn" href="logo-large.png" download>PNG</a>
+        </div>
       </div>
       <div class="scale-cell">
         <div class="scale-art bw-stage"><img src="logo-medium-bw.png" alt="Medium B/W logo"></div>
         <div class="lab">MEDIUM &middot; B/W</div>
         <div class="sub">Print &amp; monochrome</div>
+        <div class="dl-row">
+          <a class="dl-btn" href="logo-medium-bw.svg" download>SVG</a>
+          <a class="dl-btn" href="logo-medium-bw.png" download>PNG</a>
+        </div>
       </div>
       <div class="scale-cell">
         <div class="scale-art"><img src="logo-small.png" alt="Small icon logo"></div>
         <div class="lab">SMALL &middot; ICON</div>
         <div class="sub">Favicon &amp; nav badge</div>
+        <div class="dl-row">
+          <a class="dl-btn" href="logo-small.svg" download>SVG</a>
+          <a class="dl-btn" href="logo-small.png" download>PNG</a>
+        </div>
       </div>
     </div>
 
