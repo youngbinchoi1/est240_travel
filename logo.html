@@ -1,152 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Group logo identity design for Travel Group, EST 240 Visual Rhetoric.">
-  <title>Logo — Travel Group EST 240</title>
-  <style>
-    :root {
-      --ink: #0a0a0c;
-      --ink-2: #14141a;
-      --line: #2a2a35;
-      --paper: #ece7df;
-      --muted: #b8bcc7;
-      --amber: #edd07a;
-      --amber-2: #c99a3a;
-      --font-display: Georgia, 'Times New Roman', serif;
-      --font-body: Georgia, 'Times New Roman', serif;
-      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-      --maxw: 900px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--ink); color: var(--paper); font-family: var(--font-body); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Logo — Travel Group EST 240</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #0d0d0d;
+  --bg-2:      #141414;
+  --bg-3:      #1a1a1a;
+  --bg-4:      #202020;
+  --ink:       #f0ece4;
+  --ink-2:     #c4bdb0;
+  --ink-3:     #8a8278;
+  --muted:     #5c5650;
+  --line:      #262220;
+  --line-2:    #302c28;
+  --amber:     #edd07a;
+  --amber-dk:  #c9a94e;
+  --amber-lt:  #251f0c;
+  --amber-xs:  #1a1608;
+  --nav-h:     64px;
+}
 
-    /* NAV — match other pages */
-    .nav { border-bottom: 1px solid var(--line); background: rgba(10,10,12,0.92); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 10; }
-    .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--paper); }
-    .nav-brand img { width: 34px; height: 34px; object-fit: contain; }
-    .nav-brand-text { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; }
-    .nav-links { display: flex; gap: 22px; flex-wrap: wrap; }
-    .nav-links a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 3px; border-bottom: 1px solid transparent; transition: .2s; }
-    .nav-links a:hover { color: var(--paper); }
-    .nav-links a.active { color: var(--paper); border-color: var(--amber); }
-    .dropdown { position: relative; }
-    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--ink-2); border: 1px solid var(--line); padding: 8px 0; min-width: 260px; margin-top: 8px; z-index: 20; }
-    .dropdown:hover .dropdown-menu { display: block; }
-    .dropdown-menu a { display: block; padding: 8px 18px; font-size: 11px; letter-spacing: 1px; color: var(--muted); border: none; }
-    .dropdown-menu a:hover { color: var(--amber); background: rgba(237,208,122,0.06); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* HEADER IMAGE — same hero pattern as other pages */
-    .header-img { padding: 50px 0 30px; text-align: center; }
-    .header-img img { width: 100%; max-width: 460px; height: auto; }
-    .hook { font-size: 19px; color: var(--paper); text-align: center; max-width: 60ch; margin: 20px auto 60px; font-style: italic; line-height: 1.5; }
+::selection { background: var(--amber); color: var(--bg); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-    /* SECTION LABELS — match "About the Platform" style */
-    .section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-top: 60px; margin-bottom: 8px; }
-    h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(22px, 3vw, 28px); margin: 0 0 22px; line-height: 1.25; }
+/* ─── TOP NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); background: rgba(13,13,13,.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; z-index: 300;
+}
+.nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-wrap {
+  width: 48px; height: 48px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: transparent; flex-shrink: 0; transition: border-color .2s;
+}
+.nav-brand:hover .nav-logo-wrap { border-color: var(--amber); }
+.nav-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.nav-brand-text { display: flex; flex-direction: column; gap: 1px; }
+.nav-brand-name { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); line-height: 1; }
+.nav-brand-sub { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a {
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-links a:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-links a.active { color: var(--amber); }
 
-    p { margin-bottom: 18px; color: var(--paper); }
-    strong { color: #fff; }
-    em { color: var(--paper); }
+/* ─── EXPERTISE DROPDOWN ─── */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 7px 14px; border-radius: 6px;
+  transition: color .18s, background .18s;
+}
+.nav-dropdown-toggle:hover { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown-chevron { flex-shrink: 0; transition: transform .2s; }
+.nav-dropdown.open .nav-dropdown-toggle { color: var(--amber); background: var(--amber-xs); }
+.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 250px; padding: 6px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+.nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown-menu a {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: .03em;
+  text-transform: none; color: var(--ink-2); text-decoration: none;
+  padding: 9px 12px; border-radius: 6px; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.nav-dropdown-menu a:hover { background: var(--amber-xs); color: var(--amber); }
 
-    /* 3-size grid */
-    .scale-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 24px 0 36px; }
-    .scale-cell { background: var(--ink-2); padding: 30px 16px 22px; text-align: center; }
-    .scale-art { height: 160px; display: flex; align-items: center; justify-content: center; }
-    .scale-art img { max-height: 150px; max-width: 100%; object-fit: contain; }
-    .scale-art.bw-stage { background: #ffffff; border-radius: 6px; padding: 10px; }
-    .scale-cell .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--muted); margin-top: 14px; }
-    .scale-cell .sub { font-size: 14px; color: var(--muted); margin-top: 4px; }
-    .dl-row { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
-    .dl-btn { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--amber); background: transparent; border: 1px solid #6e5524; padding: 6px 14px; border-radius: 4px; text-decoration: none; transition: .2s; display: inline-block; }
-    .dl-btn:hover { border-color: var(--amber); background: rgba(237,208,122,0.08); }
+/* ─── LAYOUT ─── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--nav-h) 40px 100px;
+}
 
-    /* numbered sub-blocks for the 4-point breakdown */
-    .point-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--amber); margin-top: 34px; margin-bottom: 6px; }
-    .point-num + h3 { font-family: var(--font-display); font-weight: 500; font-size: 20px; margin: 0 0 14px; line-height: 1.3; }
+/* ─── HERO (same pattern as Home) ─── */
+.hero {
+  margin-bottom: 96px;
+  margin-left: -40px;
+  margin-right: -40px;
+}
 
-    blockquote { border-left: 2px solid var(--amber); padding: 6px 0 6px 22px; margin: 30px 0; font-family: var(--font-display); font-style: italic; font-size: 20px; line-height: 1.45; color: var(--paper); }
-    blockquote cite { display: block; font-family: var(--font-mono); font-style: normal; font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-top: 10px; }
+.hero-image-block {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-3);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* footer — match other pages */
-    .foot { border-top: 1px solid var(--line); margin-top: 90px; padding: 36px 0 50px; text-align: center; }
-    .foot-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-    .foot img { width: 70px; height: auto; margin-bottom: 20px; }
-    .foot-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
-    .foot-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-bottom: 18px; }
-    .foot-members { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); }
+.hero-image-block img {
+  max-width: 60%;
+  max-height: 70%;
+  object-fit: contain;
+}
 
-    @media (max-width: 620px) {
-      .scale-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 14px; font-size: 10px; }
-      .header-img { padding: 30px 0 20px; }
-    }
-  </style>
+.hero-content { padding: 72px 40px 0; }
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.hero-lede {
+  font-family: Georgia, serif;
+  font-size: 26px; font-weight: 300; font-style: italic;
+  color: var(--ink-2); line-height: 1.7;
+  grid-column: 1 / -1;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ─── SECTION (same pattern) ─── */
+.section {
+  margin-bottom: 88px;
+  padding-bottom: 88px;
+  border-bottom: 1px solid var(--line);
+}
+.section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 22px; height: 2px; background: var(--amber);
+}
+
+.section > h2 {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 600;
+  letter-spacing: -.025em; color: var(--ink);
+  line-height: 1.2; margin-bottom: 28px;
+}
+
+.body-text p {
+  font-size: 15px; font-weight: 300;
+  color: var(--ink-2); margin-bottom: 18px;
+  line-height: 1.8; max-width: 680px;
+}
+.body-text p:last-child { margin-bottom: 0; }
+.body-text strong { color: var(--ink); font-weight: 500; }
+.body-text em { color: var(--ink); font-style: italic; }
+
+/* ─── THREE-SIZE GRID ─── */
+.scale-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  margin: 28px 0 12px;
+}
+.scale-cell {
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 12px; padding: 28px 18px 22px;
+  text-align: center;
+  transition: border-color .2s;
+}
+.scale-cell:hover { border-color: var(--line-2); }
+.scale-art {
+  height: 170px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.scale-art img { max-height: 160px; max-width: 100%; object-fit: contain; }
+.scale-art.bw-stage {
+  background: #ffffff; border-radius: 8px; padding: 12px;
+}
+.scale-lab {
+  font-size: 10px; font-weight: 600; letter-spacing: .22em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 4px;
+}
+.scale-sub {
+  font-size: 13px; color: var(--ink-3); margin-bottom: 16px; font-weight: 300;
+}
+.dl-row { display: flex; gap: 8px; justify-content: center; }
+.dl-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--amber); background: var(--amber-lt);
+  border: 1px solid rgba(237,208,122,.2);
+  padding: 7px 14px; border-radius: 6px;
+  text-decoration: none; transition: .18s;
+}
+.dl-btn:hover { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+
+/* ─── POINT LIST (4 numbered points) ─── */
+.points { margin-top: 8px; }
+.point {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+.point:last-child { border-bottom: 1px solid var(--line); }
+.point-num {
+  font-size: 11px; font-weight: 600; letter-spacing: .2em;
+  color: var(--amber); text-transform: uppercase;
+}
+.point-body h3 {
+  font-size: 17px; font-weight: 600; color: var(--ink);
+  margin-bottom: 8px; letter-spacing: -.01em;
+}
+.point-body p {
+  font-size: 14px; font-weight: 300; color: var(--ink-2);
+  line-height: 1.75; max-width: 560px;
+}
+
+/* ─── PROMPT CARDS ─── */
+.prompt-card {
+  background: var(--bg-3); border: 1px solid var(--line);
+  border-radius: 12px; padding: 22px 24px; margin-bottom: 14px;
+}
+.prompt-card-num {
+  font-size: 10px; font-weight: 600; letter-spacing: .22em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 8px;
+}
+.prompt-card p {
+  font-size: 14px; font-weight: 300; color: var(--ink-2);
+  line-height: 1.75; margin: 0;
+}
+.tool-tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  letter-spacing: .14em; color: var(--amber);
+  background: var(--amber-lt); border: 1px solid rgba(237,208,122,.2);
+  padding: 6px 14px; border-radius: 6px; margin-bottom: 22px;
+}
+
+/* ─── FOOTER (same pattern) ─── */
+footer { background: var(--bg-2); border-top: 1px solid var(--line); }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 36px 40px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 24px;
+}
+.footer-logo-wrap {
+  width: 56px; height: 56px;
+  border-radius: 8px;
+  border: 1px solid var(--line-2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: var(--bg-3);
+  flex-shrink: 0;
+}
+.footer-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.footer-brand { display: flex; flex-direction: column; gap: 4px; }
+.footer-title { font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: .06em; }
+.footer-meta { font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+.footer-members { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.footer-member-dot {
+  font-size: 11px; color: var(--muted); padding: 4px 10px;
+  border: 1px solid var(--line); border-radius: 20px; letter-spacing: .06em;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 720px) {
+  main { padding: var(--nav-h) 20px 60px; }
+  .hero { margin-left: -20px; margin-right: -20px; }
+  .hero-content { padding: 48px 20px 0; }
+  .hero-body { grid-template-columns: 1fr; }
+  .scale-grid { grid-template-columns: 1fr; }
+  .point { grid-template-columns: 1fr; gap: 8px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-members { justify-content: flex-start; }
+  .footer-logo-wrap { margin-bottom: 12px; }
+  .nav-links { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; }
+}
+</style>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-brand">
-        <img src="logo-small.png" alt="Travel Group">
-        <span class="nav-brand-text">Travel Group · EST 240</span>
-      </a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="members.html">Members</a>
-        <a href="logo.html" class="active">Logo</a>
-        <div class="dropdown">
-          <a href="#">Expertise &#9662;</a>
-          <div class="dropdown-menu">
-            <a href="https://240-julie-black-gold.netlify.app/">Julie Yim · Lost LeBlanc</a>
-            <a href="https://3rdlover0813-gif.github.io/index.html">Juhyun Bae · Indigo Traveller</a>
-            <a href="https://sites.google.com/view/markwienschannelanalysis">Jinwan Kim · Mark Wiens</a>
-            <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home">Dae Hwan Kim · Finn Whitaker</a>
-            <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit">Juyi Bae · Via Li</a>
-            <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh">Taeyoung Koh · Drew Binsky</a>
-            <a href="https://youngbinchoi1.github.io/est240/index.html">Youngbin Choi · Paddy Doyle</a>
-          </div>
-        </div>
-        <a href="expertise.html">AI Video</a>
+<!-- ─── TOP NAV ─── -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-wrap">
+      <img src="group_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">Travel Group</span>
+      <span class="nav-brand-sub">EST 240 · Visual Rhetoric</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="members.html">Members</a>
+    <a href="logo.html" class="active">Logo</a>
+    <div class="nav-dropdown" id="expertiseDropdown">
+      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+        Expertise
+        <svg class="nav-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://240-julie-black-gold.netlify.app/" target="_blank">Julie Yim - Lost LeBlanc</a>
+        <a href="https://3rdlover0813-gif.github.io/index.html" target="_blank">Juhyun Bae - Indigo Traveller</a>
+        <a href="https://sites.google.com/view/markwienschannelanalysis" target="_blank">Jinwan Kim - Mark Wiens</a>
+        <a href="https://sites.google.com/stonybrook.edu/finnwhitaker-daehwankim/home" target="_blank">Dae Hwan Kim - Finn Whitaker</a>
+        <a href="https://sites.google.com/d/1ESuAJGqqayeaEusnykw41l4aRrkDxqFv/p/1b4Lyu74b-e5gytuA_euyU02smFroj-lz/edit" target="_blank">Juyi Bae - Via Li</a>
+        <a href="https://sites.google.com/stonybrook.edu/travelgroupest240taeyoungkoh" target="_blank">Taeyoung Koh - Drew Binsky</a>
+        <a href="https://youngbinchoi1.github.io/est240/index.html" target="_blank">Youngbin Choi - Paddy Doyle</a>
       </div>
     </div>
-  </nav>
-
-  <div class="header-img">
-    <img src="logo-large.png" alt="Travel Group Logo">
+    <a href="expertise.html">AI Video</a>
   </div>
+</nav>
 
-  <p class="hook">An airplane in flight inside a complete circle, finished in metallic gold on black. Read denotatively as travel, connotatively as passage and golden-hour light.</p>
+<!-- ─── MAIN ─── -->
+<main>
 
-  <div class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image-block">
+      <img src="logo-large.png" alt="Travel Group Logo Mark">
+    </div>
 
+    <div class="hero-content">
+      <div class="hero-body">
+        <p class="hero-lede">
+          An airplane in flight inside a complete circle, finished in metallic gold on black. Read denotatively as travel, connotatively as passage and golden-hour light.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT THE LOGO -->
+  <section class="section">
     <div class="section-label">About the Logo</div>
     <h2>Identity Design</h2>
-    <p>The Travel Group mark combines a rising airplane silhouette with a complete encircling
-    ring, broken at the base by two layered motion lines, and anchored by an italic serif
-    wordmark that names the subject outright. The composition is symmetrical, the airplane is
-    centred, and the wordmark sits on the lower axis so the eye returns to it after tracing the
-    flight path. The entire mark is rendered in a metallic gold finish on a near-black field, with
-    a flat black-and-white variant for print and a flat single-tone variant for icon use.</p>
+    <div class="body-text">
+      <p>The Travel Group mark combines a rising airplane silhouette with a complete encircling ring, broken at the base by two layered motion lines, and anchored by an italic serif wordmark that names the subject outright. The composition is symmetrical, the airplane is centred, and the wordmark sits on the lower axis so the eye returns to it after tracing the flight path.</p>
+      <p>The entire mark is rendered in a metallic gold finish on a near-black field, with a flat black-and-white variant for print and a flat single-tone variant for icon use. The mark belongs to a family. It is designed to function alongside each member's personal mark, sharing an amber accent and a dark background while keeping a distinct form. The group's mark says <em>where</em> we are looking; each member's mark says <em>who</em> is looking.</p>
+    </div>
+  </section>
 
-    <p>The mark belongs to a family. The group logo is designed to function alongside each
-    member's personal mark, sharing an amber accent and a dark background while keeping
-    a distinct form. The group's mark says <em>where</em> we are looking; each member's
-    mark says <em>who</em> is looking.</p>
-
+  <!-- THREE SIZES -->
+  <section class="section">
     <div class="section-label">Three Sizes</div>
-    <h2>Scaled for use</h2>
-    <p>Per the Module 8 brief, three sizes are provided with the middle size in black and white.
-    Each can be downloaded as SVG or PNG.</p>
+    <h2>Scaled for Use</h2>
+    <div class="body-text">
+      <p>Per the Module 8 brief, three sizes are provided with the middle size in black and white. Each can be downloaded as SVG or PNG.</p>
+    </div>
 
     <div class="scale-grid">
       <div class="scale-cell">
         <div class="scale-art"><img src="logo-large.png" alt="Large color logo"></div>
-        <div class="lab">LARGE &middot; COLOR</div>
-        <div class="sub">Metallic gold, full mark</div>
+        <div class="scale-lab">Large &middot; Color</div>
+        <div class="scale-sub">Metallic gold, full mark</div>
         <div class="dl-row">
           <a class="dl-btn" href="logo-large.svg" download>SVG</a>
           <a class="dl-btn" href="logo-large.png" download>PNG</a>
@@ -154,8 +398,8 @@
       </div>
       <div class="scale-cell">
         <div class="scale-art bw-stage"><img src="logo-medium-bw.png" alt="Medium B/W logo"></div>
-        <div class="lab">MEDIUM &middot; B/W</div>
-        <div class="sub">Print &amp; monochrome</div>
+        <div class="scale-lab">Medium &middot; B/W</div>
+        <div class="scale-sub">Print &amp; monochrome</div>
         <div class="dl-row">
           <a class="dl-btn" href="logo-medium-bw.svg" download>SVG</a>
           <a class="dl-btn" href="logo-medium-bw.png" download>PNG</a>
@@ -163,81 +407,132 @@
       </div>
       <div class="scale-cell">
         <div class="scale-art"><img src="logo-small.png" alt="Small icon logo"></div>
-        <div class="lab">SMALL &middot; ICON</div>
-        <div class="sub">Favicon &amp; nav badge</div>
+        <div class="scale-lab">Small &middot; Icon</div>
+        <div class="scale-sub">Favicon &amp; nav badge</div>
         <div class="dl-row">
           <a class="dl-btn" href="logo-small.svg" download>SVG</a>
           <a class="dl-btn" href="logo-small.png" download>PNG</a>
         </div>
       </div>
     </div>
+  </section>
 
+  <!-- READING THE MARK -->
+  <section class="section">
     <div class="section-label">Reading the Mark</div>
-    <h2>Four points</h2>
+    <h2>Four Points</h2>
 
-    <div class="point-num">01 &middot; Denotation</div>
-    <h3>Airplane &amp; Circle</h3>
-    <p>An aircraft mid-flight, a globe-line it crosses, the trail of its passage, and a wordmark
-    that names the subject. The denotation is immediate and unambiguous: travel.</p>
-
-    <div class="point-num">02 &middot; Connotation</div>
-    <h3>Gold on Black</h3>
-    <p>The gold-on-black palette connotes warmth, distance, and golden-hour light. Against a
-    near-black field the gold reads as luminous and isolated, a single point of light on a dark
-    map. It draws on the visual grammar of premium hospitality and vintage cartography.</p>
-
-    <div class="point-num">03 &middot; Scalability</div>
-    <h3>Three-Tier Reduction</h3>
-    <p>The full metallic finish carries the large size. A flat black-on-white print version
-    preserves the silhouette without colour, satisfying the brief's monochrome requirement.
-    A flat single-tone gold variant takes over at favicon and nav-badge size, where
-    gradients and thin strokes would otherwise collapse.</p>
-
-    <div class="point-num">04 &middot; Shared Identity</div>
-    <h3>One family, seven marks</h3>
-    <p>The group logo is designed to function as a family with each member's personal mark.
-    The shared amber accent and dark background establish visual continuity across pages,
-    while the distinct forms encode the collective-versus-individual dynamic at the heart of
-    the project.</p>
-
-    <blockquote>
-      An anchor does not float free of meaning; the design fixes it.
-      <cite>&mdash; after Stuart Hall</cite>
-    </blockquote>
-
-    <div class="section-label">AI Process</div>
-    <h2>Prompts and tool used</h2>
-    <p>Per the Module 8 requirement to show the prompts and the AI used. The mark was
-    developed through the prompt set below, then refined until the airplane was centred and
-    the wordmark held its baseline at every size. <strong>Tool:</strong> image generator
-    (Midjourney / DALL&middot;E class).</p>
-
-    <p><strong>Prompt 1 &middot; Full mark.</strong> A circular travel emblem on a deep black
-    background. A gold airplane silhouette ascends diagonally from lower-left to upper-right
-    and breaks through the top of an outlined gold circle. Below the airplane, two layered
-    motion swooshes curve like vapor trails. The word "travel" is centred across the lower
-    half in a bold italic serif, in the same gold. Flat vector logo style, metallic gold finish on
-    pure black, perfectly symmetrical composition.</p>
-
-    <p><strong>Prompt 2 &middot; Monochrome variant.</strong> The same emblem rendered for
-    print: a pure black silhouette on white. Circle, ascending airplane breaking the top,
-    layered motion swooshes, and the italic serif wordmark "travel" centred below. All in a
-    single flat tone, no gradient, no shadow, scalable.</p>
-
-    <p><strong>Prompt 3 &middot; Icon variant.</strong> Favicon-scale version. The same full
-    mark, flat gold on black, no gradient, generous padding on all sides so the airplane is not
-    clipped when reduced. Symmetrical.</p>
-
-  </div>
-
-  <footer class="foot">
-    <div class="foot-inner">
-      <img src="logo-small.png" alt="Travel Group">
-      <div class="foot-title">Travel Group &mdash; EST 240</div>
-      <div class="foot-sub">SUNY Korea &middot; Prof. Pennings &middot; Spring 2026</div>
-      <div class="foot-members">Julie Yim &middot; Juhyun Bae &middot; Jinwan Kim &middot; Dae Hwan Kim &middot; Juyi Bae &middot; Taeyoung Koh &middot; Youngbin Choi</div>
+    <div class="points">
+      <div class="point">
+        <div class="point-num">01 &middot; Denotation</div>
+        <div class="point-body">
+          <h3>Airplane &amp; Circle</h3>
+          <p>An aircraft mid-flight, a globe-line it crosses, the trail of its passage, and a wordmark that names the subject. The denotation is immediate and unambiguous: travel.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">02 &middot; Connotation</div>
+        <div class="point-body">
+          <h3>Gold on Black</h3>
+          <p>The gold-on-black palette connotes warmth, distance, and golden-hour light. Against a near-black field the gold reads as luminous and isolated, a single point of light on a dark map. It draws on the visual grammar of premium hospitality and vintage cartography.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">03 &middot; Scalability</div>
+        <div class="point-body">
+          <h3>Three-Tier Reduction</h3>
+          <p>The full metallic finish carries the large size. A flat black-on-white print version preserves the silhouette without colour, satisfying the brief's monochrome requirement. A flat single-tone gold variant takes over at favicon and nav-badge size, where gradients and thin strokes would otherwise collapse.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-num">04 &middot; Shared Identity</div>
+        <div class="point-body">
+          <h3>One Family, Seven Marks</h3>
+          <p>The group logo is designed to function as a family with each member's personal mark. The shared amber accent and dark background establish visual continuity across pages, while the distinct forms encode the collective-versus-individual dynamic at the heart of the project.</p>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- AI PROCESS -->
+  <section class="section">
+    <div class="section-label">AI Process</div>
+    <h2>Prompts and Tool Used</h2>
+    <div class="body-text">
+      <p>Per the Module 8 requirement to show the prompts and the AI used. The mark was developed through the prompt set below, then refined until the airplane was centred and the wordmark held its baseline at every size.</p>
+    </div>
+    <div class="tool-tag">Tool &middot; Image generator (Midjourney / DALL&middot;E class)</div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-num">Prompt 1 &middot; Full Mark</div>
+      <p>A circular travel emblem on a deep black background. A gold airplane silhouette ascends diagonally from lower-left to upper-right and breaks through the top of an outlined gold circle. Below the airplane, two layered motion swooshes curve like vapor trails. The word "travel" is centred across the lower half in a bold italic serif, in the same gold. Flat vector logo style, metallic gold finish on pure black, perfectly symmetrical composition.</p>
+    </div>
+    <div class="prompt-card">
+      <div class="prompt-card-num">Prompt 2 &middot; Monochrome Variant</div>
+      <p>The same emblem rendered for print: a pure black silhouette on white. Circle, ascending airplane breaking the top, layered motion swooshes, and the italic serif wordmark "travel" centred below. All in a single flat tone, no gradient, no shadow, scalable.</p>
+    </div>
+    <div class="prompt-card">
+      <div class="prompt-card-num">Prompt 3 &middot; Icon Variant</div>
+      <p>Favicon-scale version. The same full mark, flat gold on black, no gradient, generous padding on all sides so the airplane is not clipped when reduced. Symmetrical.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-wrap">
+      <img src="group_logo.png" alt="Travel Group Logo">
+    </div>
+    <div class="footer-brand">
+      <div class="footer-title">Travel Group — EST 240</div>
+      <div class="footer-meta">SUNY Korea · Prof. Pennings · Spring 2026</div>
+    </div>
+    <div class="footer-members">
+      <span class="footer-member-dot">Julie Yim</span>
+      <span class="footer-member-dot">Juhyun Bae</span>
+      <span class="footer-member-dot">Jinwan Kim</span>
+      <span class="footer-member-dot">Dae Hwan Kim</span>
+      <span class="footer-member-dot">Juyi Bae</span>
+      <span class="footer-member-dot">Taeyoung Koh</span>
+      <span class="footer-member-dot">Youngbin Choi</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Expertise dropdown toggle (same as other pages)
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dd.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
