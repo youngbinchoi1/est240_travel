@@ -204,8 +204,14 @@ main {
   margin-bottom: 16px;
 }
 .scale-art img { max-height: 160px; max-width: 100%; object-fit: contain; }
+.scale-cell.bw-cell {
+  background: #ffffff;
+}
+.scale-cell.bw-cell .scale-lab { color: var(--bg); }
+.scale-cell.bw-cell .scale-sub { color: #555; }
 .scale-art.bw-stage {
-  background: #ffffff; border-radius: 8px; padding: 12px;
+  background: #ffffff;
+  padding: 12px;
 }
 .scale-lab {
   font-size: 10px; font-weight: 600; letter-spacing: .22em;
@@ -396,7 +402,7 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
           <a class="dl-btn" href="logo-large.png" download>PNG</a>
         </div>
       </div>
-      <div class="scale-cell">
+      <div class="scale-cell bw-cell">
         <div class="scale-art bw-stage"><img src="logo-medium-bw.png" alt="Medium B/W logo"></div>
         <div class="scale-lab">Medium &middot; B/W</div>
         <div class="scale-sub">Print &amp; monochrome</div>
