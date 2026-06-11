@@ -231,12 +231,27 @@ main {
 }
 
 /* ─── YOUTUBE EXPLAINER ─── */
+.yt-section-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+}
+
 .yt-explainer-text p {
   font-size: 15px; font-weight: 300;
   color: var(--ink-2); margin-bottom: 18px;
   line-height: 1.8; max-width: 680px;
 }
 .yt-explainer-text p:last-child { margin-bottom: 0; }
+
+.flight-path-decoration {
+  width: 120px;
+  height: auto;
+  min-height: 400px;
+  flex-shrink: 0;
+}
 
 /* ─── FOOTER ─── */
 footer { background: var(--bg-2); border-top: 1px solid var(--line); }
@@ -279,6 +294,8 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
   .hero-content { padding: 48px 20px 0; }
   .hero-body { grid-template-columns: 1fr; }
   .hero-lede { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+  .yt-section-wrapper { grid-template-columns: 1fr; gap: 24px; }
+  .flight-path-decoration { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .footer-members { justify-content: flex-start; }
   .footer-logo-wrap { margin-bottom: 12px; }
@@ -348,9 +365,32 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
       <div class="section-label" style="margin-top:56px;">About the Platform</div>
       <h2>Travel Genre in YouTube Platform</h2>
 
-      <div class="yt-explainer-text" style="margin-top:40px;">
-        <p>General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. </p>
-        <p>General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description.</p>
+      <div class="yt-section-wrapper">
+        <div class="yt-explainer-text" style="margin-top:40px;">
+          <p>General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. </p>
+          <p>General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description. General description.</p>
+        </div>
+        <svg class="flight-path-decoration" viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="visible">
+          <defs>
+            <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#edd07a;stop-opacity:1" />
+              <stop offset="85%" style="stop-color:#edd07a;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#edd07a;stop-opacity:0" />
+            </linearGradient>
+            <filter id="colorPlane">
+              <feColorMatrix type="matrix" values="0.6 0 0 0 0.93 0.6 0 0 0 0.82 0.6 0 0 0 0.48 0 0 0 1 0"/>
+            </filter>
+            <style>
+              .flight-line { stroke: url(#fadeGradient); stroke-width: 2; fill: none; stroke-dasharray: 8, 16; }
+            </style>
+          </defs>
+          <!-- Curved dashed line -->
+          <path class="flight-line" d="M -5 10 Q 75 200, 5 350 Q -10 470, 5 580" />
+          <!-- Airplane icon image -->
+          <g transform="translate(-10, -20) rotate(290)">
+            <image xlink:href="plane_icon.png" x="-40" y="-40" width="70" height="70" preserveAspectRatio="xMidYMid meet" filter="url(#colorPlane)"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
