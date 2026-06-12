@@ -24,7 +24,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 body {
   background: var(--bg); color: var(--ink);
   font-family: 'DM Sans', sans-serif;
@@ -120,12 +120,14 @@ body {
 }
 
 .member-slide {
-  height: calc(100vh - var(--nav-h));
+  min-height: calc(100vh - var(--nav-h));
   scroll-snap-align: start;
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
-  overflow: hidden;
+}
+.member-slide + .member-slide {
+  border-top: 1px solid var(--line);
 }
 
 /* Left — image panel */
@@ -389,7 +391,7 @@ footer {
           Visit Page
           <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </a>
-        <a href="mailto:julie.yim@stonybrook.edu" class="slide-email">julie.yim@stonybrook.edu</a>
+        <a href="mailto:jeewoo.yim@stonybrook.edu" class="slide-email">jeewoo.yim@stonybrook.edu</a>
       </div>
     </div>
   </section>
@@ -480,7 +482,7 @@ footer {
         </a>
         <a href="mailto:daehwan.kim@stonybrook.edu" class="slide-email">daehwan.kim.2@stonybrook.edu</a>
       </div>
-    </div>
+    </div> 
   </section>
 
   <!-- 5 — Juyi Bae -->
