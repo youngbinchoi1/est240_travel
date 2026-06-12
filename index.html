@@ -37,6 +37,12 @@ body {
 }
 
 ::selection { background: var(--amber); color: var(--bg); }
+
+/* ─── PLANE CURSOR (clickable objects) ─── */
+a, button, summary, label, select,
+[role="button"], [onclick], .nav-dropdown-toggle {
+  cursor: url('plane_cursor.png') 12 6, pointer;
+}
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
@@ -106,7 +112,7 @@ body {
 .nav-dropdown-toggle {
   display: flex; align-items: center; gap: 6px;
   font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); background: none; border: none; cursor: pointer;
+  color: var(--muted); background: none; border: none; cursor: url('plane_cursor.png') 12 6, pointer;
   font-family: inherit; padding: 7px 14px; border-radius: 6px;
   transition: color .18s, background .18s;
 }
@@ -181,6 +187,18 @@ main {
 
 .hero-content { padding: 72px 40px 0; }
 
+.hero-title {
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  margin-bottom: 0;
+}
+
 .hero-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -193,9 +211,8 @@ main {
   font-size: 26px; font-weight: 300; font-style: italic;
   color: var(--ink-2); line-height: 1.7;
   grid-column: 1 / -1;
-  padding-top: 24px;
+  padding-top: 0;
   padding-bottom: 24px;
-  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
@@ -355,6 +372,7 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
 
     <div class="hero-content">
       <div class="hero-body">
+        <h1 class="hero-title">EST 240 Group Website</h1>
         <p class="hero-lede">
           We analyze how YouTube travel channels construct meaning, authority, and desire through visual rhetoric.
         </p>
@@ -362,7 +380,7 @@ footer { background: var(--bg-2); border-top: 1px solid var(--line); }
         </div>
       </div>
 
-      <div class="section-label" style="margin-top:56px;">About the Platform</div>
+      <div class="section-label" style="margin-top:56px;">About</div>
       <h2>Travel Genre in YouTube Platform</h2>
 
       <div class="yt-section-wrapper">

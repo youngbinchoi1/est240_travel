@@ -34,6 +34,12 @@ body {
 }
 
 ::selection { background: var(--amber); color: var(--bg); }
+
+/* ─── PLANE CURSOR (clickable objects) ─── */
+a, button, summary, label, select,
+[role="button"], [onclick], .nav-dropdown-toggle {
+  cursor: url('plane_cursor.png') 12 6, pointer;
+}
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
@@ -73,7 +79,7 @@ body {
 .nav-dropdown-toggle {
   display: flex; align-items: center; gap: 6px;
   font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); background: none; border: none; cursor: pointer;
+  color: var(--muted); background: none; border: none; cursor: url('plane_cursor.png') 12 6, pointer;
   font-family: inherit; padding: 7px 14px; border-radius: 6px;
   transition: color .18s, background .18s;
 }
@@ -107,7 +113,7 @@ body {
 .scroll-dot {
   width: 18px; height: 18px; border-radius: 50%;
   background: var(--line-2); border: 2px solid var(--muted);
-  cursor: pointer; transition: background .2s, transform .2s;
+  cursor: url('plane_cursor.png') 12 6, pointer; transition: background .2s, transform .2s;
   display: block;
 }
 .scroll-dot.active { background: var(--amber); transform: scale(1.3); border-color: var(--amber); }
